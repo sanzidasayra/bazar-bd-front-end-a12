@@ -1,35 +1,33 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ updated from useHistory to useNavigate
+import { useNavigate } from "react-router-dom"; 
 import useAuth from "../../hooks/useAuth";
 
 const AllOrder = () => {
   const { user } = useAuth();
-  const navigate = useNavigate(); // ✅ replace useHistory
+  const navigate = useNavigate(); 
 
   const [orders, setOrders] = useState([]);
 
-  // Ensure that only admin users can access this page
   useEffect(() => {
     if (user?.role !== "admin") {
       // ✅ redirect if not admin
     }
   }, [user, navigate]);
 
-  // Fetch orders using the native fetch API
   useEffect(() => {
     if (user?.email) {
       console.log("Fetching orders for:", user.email);
 
       fetch(
-        `https://bazar-bd-back-end-a12.onrender.com/orders?email=${user.email}`
+        `https://bazar-bd-back-end-a12.onrender.com/all-orders`
       )
         .then((res) => {
-          console.log("Raw response:", res); // 👈 added
+          console.log("Raw response:", res); 
           if (!res.ok) throw new Error("Network response was not ok");
           return res.json();
         })
         .then((data) => {
-          console.log("Orders fetched from server:", data); // 👈 added
+          console.log("Orders fetched from server:", data); 
           setOrders(data);
         })
         .catch((err) => {
@@ -65,7 +63,7 @@ const AllOrder = () => {
                   colSpan='7'
                   className='px-6 py-10 text-center text-gray-500'
                 >
-                  😕 No orders found.
+                 No orders found.
                 </td>
               </tr>
             ) : (
