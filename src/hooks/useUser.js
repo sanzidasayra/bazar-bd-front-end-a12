@@ -17,7 +17,7 @@ const useUser = () => {
     fetch(`https://bazar-bd-back-end-a12.onrender.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setIsUser(data.role === "user");
+        setIsUser(data.role === "user" || data.role === "admin" );
         setIsUserLoading(false);
       })
       .catch(() => {
