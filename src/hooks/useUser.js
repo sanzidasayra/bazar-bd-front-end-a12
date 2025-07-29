@@ -14,7 +14,7 @@ const useUser = () => {
     }
 
     setIsUserLoading(true);
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://bazar-bd-back-end-a12.onrender.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setIsUser(data.role === "user");

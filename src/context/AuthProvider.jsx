@@ -1,8 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import { auth } from '../../Firebase'; 
-import { AuthContext } from './AuthContext';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "../../Firebase";
+import { AuthContext } from "./AuthContext";
 import { updateProfile } from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
@@ -14,7 +21,9 @@ const AuthProvider = ({ children }) => {
 
   const fetchUserRole = async (email) => {
     try {
-      const res = await fetch(`http://localhost:5000/users/${email}`);
+      const res = await fetch(
+        `https://bazar-bd-back-end-a12.onrender.com/users/${email}`
+      );
       if (!res.ok) throw new Error("User fetch failed");
       const userData = await res.json();
       setRole(userData.role);
@@ -38,38 +47,41 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
- const createUser = async (email, password, name, photoURL = "") => {
-  setLoading(true);
-  try {
-    const result = await createUserWithEmailAndPassword(auth, email, password);
-    const loggedUser = result.user;
+  const createUser = async (email, password, name, photoURL = "") => {
+    setLoading(true);
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const loggedUser = result.user;
 
-    await updateProfile(loggedUser, { displayName: name, photoURL });
+      await updateProfile(loggedUser, { displayName: name, photoURL });
 
-    const saveUser = {
-      name, 
-      email: loggedUser.email,
-      photoURL,
-      role: "user",
-    };
+      const saveUser = {
+        name,
+        email: loggedUser.email,
+        photoURL,
+        role: "user",
+      };
 
-    await fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(saveUser)
-    });
+      await fetch("https://bazar-bd-back-end-a12.onrender.com/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(saveUser),
+      });
 
-    fetchUserRole(loggedUser.email);
+      fetchUserRole(loggedUser.email);
 
-    return result;
-  } catch (error) {
-    console.error("Error creating user:", error);
-    throw error;
-  } finally {
-    setLoading(false);
-  }
-};
-
+      return result;
+    } catch (error) {
+      console.error("Error creating user:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const signIn = async (email, password) => {
     setLoading(true);
@@ -79,7 +91,6 @@ const AuthProvider = ({ children }) => {
       fetchUserRole(email);
 
       return result;
-
     } finally {
       setLoading(false);
     }
@@ -94,13 +105,13 @@ const AuthProvider = ({ children }) => {
       const saveUser = {
         name: loggedUser.displayName,
         email: loggedUser.email,
-        role: "buyer", 
+        role: "buyer",
       };
 
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://bazar-bd-back-end-a12.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(saveUser)
+        body: JSON.stringify(saveUser),
       });
 
       fetchUserRole(loggedUser.email);
@@ -118,12 +129,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth)
       .then(() => {
-        setRole(null); 
+        setRole(null);
         setUser(null);
         setLoading(false);
         console.log("Successfully logged out");
       })
-      .catch(error => {
+      .catch((error) => {
         setLoading(false);
         console.error("Error logging out:", error);
       });
@@ -139,7 +150,9 @@ const AuthProvider = ({ children }) => {
     logOut,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

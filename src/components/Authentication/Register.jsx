@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import useAuth from '../../hooks/useAuth';
-import { updateProfile } from 'firebase/auth';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useAuth();
@@ -22,27 +22,37 @@ const Register = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const   onSubmit = async (data) => {
-  const result = await createUser(data.email, data.password, data.name, data.photo);
-  await updateProfile(result.user, { displayName: data.name, photoURL: data.photo });
+  const onSubmit = async (data) => {
+    const result = await createUser(
+      data.email,
+      data.password,
+      data.name,
+      data.photo
+    );
+    await updateProfile(result.user, {
+      displayName: data.name,
+      photoURL: data.photo,
+    });
 
-  const savedUser = {
-    name: data.name,
-    email: data.email,
-    role: "user",
+    const savedUser = {
+      name: data.name,
+      email: data.email,
+      role: "user",
+    };
+
+    console.log("Saving to DB:", savedUser);
+    const response = await fetch(
+      "https://bazar-bd-back-end-a12.onrender.com/users",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(savedUser),
+      }
+    );
+    const dbRes = await response.json();
+    console.log("DB Response:", dbRes);
+    navigate("/login");
   };
-
-  console.log("Saving to DB:", savedUser);
-  const response = await fetch("http://localhost:5000/users", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(savedUser),
-  });
-  const dbRes = await response.json();
-  console.log("DB Response:", dbRes);
-  navigate("/login");
-};
-
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
@@ -55,92 +65,95 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-md w-full max-w-md mx-auto sm:px-4 md:px-8 mt-16 mb-20">
-      <h2 className="text-3xl font-bold text-[#03373D] text-center mb-2">
+    <div className='bg-white p-4 rounded-xl shadow-md w-full max-w-md mx-auto sm:px-4 md:px-8 mt-16 mb-20'>
+      <h2 className='text-3xl font-bold text-[#03373D] text-center mb-2'>
         Create an Account
       </h2>
-      <p className="text-gray-500 text-sm text-center mb-6">
+      <p className='text-gray-500 text-sm text-center mb-6'>
         Register with Profast
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
         <input
-          type="text"
-          {...register('name', { required: 'Name is required' })}
-          placeholder="Full Name"
-          className="input input-bordered w-full py-2 px-3 text-sm"
+          type='text'
+          {...register("name", { required: "Name is required" })}
+          placeholder='Full Name'
+          className='input input-bordered w-full py-2 px-3 text-sm'
         />
         {errors.name && (
-          <p className="text-red-500 text-sm">{errors.name.message}</p>
+          <p className='text-red-500 text-sm'>{errors.name.message}</p>
         )}
 
         <input
-          type="email"
-          {...register('email', { required: 'Email is required' })}
-          placeholder="Email"
-          className="input input-bordered w-full py-2 px-3 text-sm"
+          type='email'
+          {...register("email", { required: "Email is required" })}
+          placeholder='Email'
+          className='input input-bordered w-full py-2 px-3 text-sm'
         />
         {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
+          <p className='text-red-500 text-sm'>{errors.email.message}</p>
         )}
 
         <input
-          type="text"
-          {...register('photo', { required: 'Photo URL is required' })}
-          placeholder="Photo URL"
-          className="input input-bordered w-full py-2 px-3 text-sm"
+          type='text'
+          {...register("photo", { required: "Photo URL is required" })}
+          placeholder='Photo URL'
+          className='input input-bordered w-full py-2 px-3 text-sm'
         />
         {errors.photo && (
-          <p className="text-red-500 text-sm">{errors.photo.message}</p>
+          <p className='text-red-500 text-sm'>{errors.photo.message}</p>
         )}
 
-        <div className="relative">
+        <div className='relative'>
           <input
-            type={showPassword ? 'text' : 'password'}
-            {...register('password', {
-              required: 'Password is required',
+            type={showPassword ? "text" : "password"}
+            {...register("password", {
+              required: "Password is required",
               minLength: {
                 value: 6,
-                message: 'Password must be at least 6 characters',
+                message: "Password must be at least 6 characters",
               },
             })}
-            placeholder="Password"
-            className="input input-bordered w-full py-2 px-3 text-sm"
+            placeholder='Password'
+            className='input input-bordered w-full py-2 px-3 text-sm'
           />
           <div
-            className="absolute right-3 top-3 cursor-pointer"
+            className='absolute right-3 top-3 cursor-pointer'
             onClick={togglePasswordVisibility}
           >
             {showPassword ? (
-              <FaEyeSlash className="text-xl" />
+              <FaEyeSlash className='text-xl' />
             ) : (
-              <FaEye className="text-xl" />
+              <FaEye className='text-xl' />
             )}
           </div>
         </div>
         {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
+          <p className='text-red-500 text-sm'>{errors.password.message}</p>
         )}
 
-        <button type="submit" className="btn bg-[#CAEB66] w-full mt-4 py-2 text-sm">
+        <button
+          type='submit'
+          className='btn bg-[#CAEB66] w-full mt-4 py-2 text-sm'
+        >
           Sign Up
         </button>
 
-        <p className="text-sm mt-2 text-center">
-          Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
+        <p className='text-sm mt-2 text-center'>
+          Already have an account?{" "}
+          <Link to='/login' className='text-blue-600 hover:underline'>
             Login
           </Link>
         </p>
 
-        <div className="divider">or</div>
+        <div className='divider'>or</div>
 
         <button
-          type="button"
+          type='button'
           onClick={handleGoogleLogin}
-          className="btn btn-outline w-full flex items-center justify-center gap-2 py-2 text-sm"
+          className='btn btn-outline w-full flex items-center justify-center gap-2 py-2 text-sm'
         >
-          <FcGoogle className="text-xl" />
+          <FcGoogle className='text-xl' />
           Login with Google
         </button>
       </form>

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React from 'react';
+import axios from "axios";
+import React from "react";
 
 const axiosSecure = axios.create({
-  baseURL: `http://localhost:5000/`
-})
+  baseURL: `https://bazar-bd-back-end-a12.onrender.com/`,
+});
 
 const useAxiosSecure = () => {
   return axiosSecure;

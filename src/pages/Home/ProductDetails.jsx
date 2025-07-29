@@ -26,7 +26,7 @@ const ProductDetails = () => {
   const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(`https://bazar-bd-back-end-a12.onrender.com/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -39,15 +39,14 @@ const ProductDetails = () => {
   }, [id]);
 
   const handlePay = (id) => {
-    console.log('Proceed to payment for', id);
+    console.log("Proceed to payment for", id);
 
-      navigate(`/payment/${id}`)
-
-  }
+    navigate(`/payment/${id}`);
+  };
 
   useEffect(() => {
     if (product?._id) {
-      fetch(`http://localhost:5000/reviews/${product._id}`)
+      fetch(`https://bazar-bd-back-end-a12.onrender.com/reviews/${product._id}`)
         .then((res) => res.json())
         .then((data) => setReviews(data));
     }
@@ -68,103 +67,104 @@ const ProductDetails = () => {
       date: new Date(),
     };
 
-    const res = await fetch("http://localhost:5000/reviews", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newReview),
-    });
-if (res.ok) {
-  toast.success("Review added!");
-  setCommentText("");
-  setUserRating(0);
+    const res = await fetch(
+      "https://bazar-bd-back-end-a12.onrender.com/reviews",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newReview),
+      }
+    );
+    if (res.ok) {
+      toast.success("Review added!");
+      setCommentText("");
+      setUserRating(0);
 
-  fetch(`http://localhost:5000/reviews/${product._id}`)
-    .then((res) => res.json())
-    .then((updatedReviews) => setReviews(updatedReviews));
-} else {
-  toast.error("Failed to submit review.");
-}
-
+      fetch(`https://bazar-bd-back-end-a12.onrender.com/reviews/${product._id}`)
+        .then((res) => res.json())
+        .then((updatedReviews) => setReviews(updatedReviews));
+    } else {
+      toast.error("Failed to submit review.");
+    }
   };
 
   if (loading) {
     return (
-      <div className="text-center mt-10 text-xl">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className='text-center mt-10 text-xl'>
+        <span className='loading loading-spinner loading-lg'></span>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="text-center mt-10 text-red-500 text-xl">
+      <div className='text-center mt-10 text-red-500 text-xl'>
         Product not found.
       </div>
     );
   }
 
-
   const handleAddToWatchlist = async () => {
-  if (!user) {
-    toast.error("Please login to add items to watchlist");
-    return;
-  }
+    if (!user) {
+      toast.error("Please login to add items to watchlist");
+      return;
+    }
 
-  const watchlistItem = {
-    productId: product._id,
-    itemName: product.itemName,
-    productImage: product.productImage,
-    userEmail: user.email,
-    date: new Date(),
+    const watchlistItem = {
+      productId: product._id,
+      itemName: product.itemName,
+      productImage: product.productImage,
+      userEmail: user.email,
+      date: new Date(),
+    };
+
+    try {
+      const res = await fetch(
+        "https://bazar-bd-back-end-a12.onrender.com/watchlist",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(watchlistItem),
+        }
+      );
+
+      if (res.ok) {
+        toast.success("Added to watchlist!");
+      } else if (res.status === 409) {
+        toast.info("Already in watchlist.");
+      } else {
+        throw new Error("Failed to add to watchlist.");
+      }
+    } catch (err) {
+      console.error("Watchlist error:", err);
+      toast.error("Could not add to watchlist.");
+    }
   };
 
-  try {
-    const res = await fetch("http://localhost:5000/watchlist", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(watchlistItem),
-    });
-
-    if (res.ok) {
-      toast.success("Added to watchlist!");
-    } else if (res.status === 409) {
-      toast.info("Already in watchlist.");
-    } else {
-      throw new Error("Failed to add to watchlist.");
-    }
-  } catch (err) {
-    console.error("Watchlist error:", err);
-    toast.error("Could not add to watchlist.");
-  }
-};
-
-
-
-
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-6 rounded-xl shadow-2xl bg-[#f2fcf9]">
-      <div className="flex flex-col md:flex-row gap-6">
+    <div className='max-w-5xl mx-auto mt-10 p-6 rounded-xl shadow-2xl bg-[#f2fcf9]'>
+      <div className='flex flex-col md:flex-row gap-6'>
         <img
           src={product.productImage}
           alt={product.itemName}
-          className="w-full md:w-1/2 h-auto object-contain rounded-xl shadow"
+          className='w-full md:w-1/2 h-auto object-contain rounded-xl shadow'
         />
 
-        <div className="flex-1 space-y-3 text-[#153c2e]">
-          <h2 className="text-3xl font-bold">{product.itemName}</h2>
+        <div className='flex-1 space-y-3 text-[#153c2e]'>
+          <h2 className='text-3xl font-bold'>{product.itemName}</h2>
           <p>
-            <span className="font-semibold">Market:</span> {product.marketName}
+            <span className='font-semibold'>Market:</span> {product.marketName}
           </p>
           <p>
-            <span className="font-semibold">Date:</span>{" "}
+            <span className='font-semibold'>Date:</span>{" "}
             {product.prices?.[0]?.date
               ? new Date(product.prices[0].date).toLocaleDateString()
               : "N/A"}
           </p>
 
           <div>
-            <h3 className="font-semibold text-lg mb-1">Price History:</h3>
-            <ul className="list-disc pl-5 text-gray-700">
+            <h3 className='font-semibold text-lg mb-1'>Price History:</h3>
+            <ul className='list-disc pl-5 text-gray-700'>
               {product.prices?.map((item, i) => (
                 <li key={i}>
                   {product.itemName} — ৳{item.price}/kg (
@@ -174,21 +174,21 @@ if (res.ok) {
             </ul>
           </div>
 
-          <div className="bg-[#d4f2e1] p-4 rounded-lg mt-2">
-            <h3 className="text-lg font-bold mb-2">Vendor Info</h3>
+          <div className='bg-[#d4f2e1] p-4 rounded-lg mt-2'>
+            <h3 className='text-lg font-bold mb-2'>Vendor Info</h3>
             <p>
-              <span className="font-semibold">Name:</span>{" "}
+              <span className='font-semibold'>Name:</span>{" "}
               {product.vendorName || "Unknown"}
             </p>
             <p>
-              <span className="font-semibold">Email:</span>{" "}
+              <span className='font-semibold'>Email:</span>{" "}
               {product.vendorEmail || "N/A"}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+          <div className='flex flex-col sm:flex-row gap-4 mt-4'>
             <button
-            onClick={handleAddToWatchlist}
+              onClick={handleAddToWatchlist}
               disabled={role === "admin" || role === "vendor"}
               className={`flex-1 px-4 py-2 rounded-full text-white transition-all ${
                 role === "admin" || role === "vendor"
@@ -199,19 +199,22 @@ if (res.ok) {
               Add to Watchlist
             </button>
 
-            <button onClick={() => handlePay(product._id)} className="flex-1 px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white transition-all">
+            <button
+              onClick={() => handlePay(product._id)}
+              className='flex-1 px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white transition-all'
+            >
               Buy Product
             </button>
           </div>
         </div>
       </div>
 
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-4">User Reviews</h2>
+      <div className='mt-12'>
+        <h2 className='text-2xl font-bold mb-4'>User Reviews</h2>
 
         {user && (
-          <div className="bg-white p-4 rounded shadow mb-6">
-            <div className="flex items-center gap-2 mb-2">
+          <div className='bg-white p-4 rounded shadow mb-6'>
+            <div className='flex items-center gap-2 mb-2'>
               {[1, 2, 3, 4, 5].map((num) => (
                 <FaStar
                   key={num}
@@ -225,13 +228,13 @@ if (res.ok) {
             <textarea
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="w-full p-2 border rounded"
-              rows="3"
-              placeholder="Write your feedback here..."
+              className='w-full p-2 border rounded'
+              rows='3'
+              placeholder='Write your feedback here...'
             ></textarea>
             <button
               onClick={handleReviewSubmit}
-              className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className='mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'
             >
               Submit Review
             </button>
@@ -239,20 +242,20 @@ if (res.ok) {
         )}
 
         {reviews.length === 0 ? (
-          <p className="text-gray-500">No reviews yet.</p>
+          <p className='text-gray-500'>No reviews yet.</p>
         ) : (
-          <ul className="space-y-4">
+          <ul className='space-y-4'>
             {reviews.map((rev, idx) => (
-              <li key={idx} className="bg-white p-4 rounded shadow">
-                <div className="flex justify-between items-center mb-2">
-                  <p className="font-semibold">
+              <li key={idx} className='bg-white p-4 rounded shadow'>
+                <div className='flex justify-between items-center mb-2'>
+                  <p className='font-semibold'>
                     {rev.userName} ({rev.userEmail})
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className='text-sm text-gray-500'>
                     {new Date(rev.date).toLocaleDateString()}
                   </p>
                 </div>
-                <div className="flex items-center text-yellow-400 mb-1">
+                <div className='flex items-center text-yellow-400 mb-1'>
                   {[...Array(rev.rating)].map((_, i) => (
                     <FaStar key={i} />
                   ))}
@@ -264,35 +267,35 @@ if (res.ok) {
         )}
       </div>
 
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-4">Price Trend Comparison</h2>
+      <div className='mt-12'>
+        <h2 className='text-2xl font-bold mb-4'>Price Trend Comparison</h2>
         {product.prices?.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width='100%' height={300}>
             <LineChart data={product.prices}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray='3 3' />
               <XAxis
-                dataKey="date"
+                dataKey='date'
                 tickFormatter={(d) => new Date(d).toLocaleDateString()}
               />
               <YAxis />
               <Tooltip formatter={(value) => `৳${value}`} />
               <Line
-                type="monotone"
-                dataKey="price"
-                stroke="#38a169"
+                type='monotone'
+                dataKey='price'
+                stroke='#38a169'
                 strokeWidth={2}
               />
             </LineChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-gray-500">No price trend data available.</p>
+          <p className='text-gray-500'>No price trend data available.</p>
         )}
       </div>
 
-      <div className="mt-12 text-center">
+      <div className='mt-12 text-center'>
         <button
           onClick={() => navigate("/")}
-          className="px-6 py-2 bg-[#1a3e31] hover:bg-[#0f2a21] text-white rounded-full transition duration-300"
+          className='px-6 py-2 bg-[#1a3e31] hover:bg-[#0f2a21] text-white rounded-full transition duration-300'
         >
           Back to Home
         </button>
