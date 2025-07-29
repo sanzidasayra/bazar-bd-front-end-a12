@@ -1,0 +1,21 @@
+.swiper-container {
+  max-width: 100%;
+  margin: auto;
+}
+
+.swiper-slide {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #333;
+}
