@@ -2,14 +2,19 @@
 import { motion } from "framer-motion";
 import { FaCircle} from "react-icons/fa"; 
 import { FaCaretSquareUp } from "react-icons/fa";
+import tomImg from "../../assets/tom.jpg";
+import onionImg from "../../assets/onion.jpg";
+import brinjalImg from "../../assets/brinjal.webp";
+import cucumberImg from "../../assets/cucumber.jpg";
+
 const sampleData = {
   rising: [
-    { name: "Tomato", change: "+৳80/kg", img: "/src/assets/tom.jpg" },
-    { name: "Onion", change: "+৳50/kg", img: "/src/assets/onion.jpg" },
+    { name: "Tomato", change: "+৳80/kg", img: tomImg },
+    { name: "Onion", change: "+৳50/kg", img: onionImg },
   ],
   falling: [
-    { name: "Brinjal", change: "-৳40/kg", img: "/src/assets/brinjal.webp" },
-    { name: "Cucumber", change: "-৳30/kg", img: "/src/assets/cucumber.jpg" },
+    { name: "Brinjal", change: "-৳40/kg", img: brinjalImg },
+    { name: "Cucumber", change: "-৳30/kg", img: cucumberImg },
   ],
 };
 
