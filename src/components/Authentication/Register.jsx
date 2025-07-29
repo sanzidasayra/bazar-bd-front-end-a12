@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -5,9 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify"; // <-- Import Toastify
 
 const Register = () => {
-  const { createUser, signInWithGoogle } = useAuth();
+  const { createUser, signIn, signInWithGoogle } = useAuth(); // <-- Add signIn
   const navigate = useNavigate();
 
   const {
@@ -23,44 +25,60 @@ const Register = () => {
   };
 
   const onSubmit = async (data) => {
-    const result = await createUser(
-      data.email,
-      data.password,
-      data.name,
-      data.photo
-    );
-    await updateProfile(result.user, {
-      displayName: data.name,
-      photoURL: data.photo,
-    });
+    try {
+      const result = await createUser(
+        data.email,
+        data.password,
+        data.name,
+        data.photo
+      );
+      await updateProfile(result.user, {
+        displayName: data.name,
+        photoURL: data.photo,
+      });
 
-    const savedUser = {
-      name: data.name,
-      email: data.email,
-      role: "user",
-    };
+      // Save user to database
+      const savedUser = {
+        name: data.name,
+        email: data.email,
+        role: "user",
+      };
 
-    console.log("Saving to DB:", savedUser);
-    const response = await fetch(
-      "https://bazar-bd-back-end-a12.onrender.com/users",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(savedUser),
-      }
-    );
-    const dbRes = await response.json();
-    console.log("DB Response:", dbRes);
-    navigate("/login");
+      await fetch(
+        "https://bazar-bd-back-end-a12.onrender.com/users",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(savedUser),
+        }
+      );
+
+      // Immediately sign in the user after registration!
+      await signIn(data.email, data.password);
+
+      toast.success("Your account was created and you are now logged in!");
+
+      // Redirect to home and force refresh to load user context
+      navigate("/");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500); // 0.5 second delay (can tweak if you want)
+    } catch (error) {
+      toast.error(error.message || "Registration failed");
+    }
   };
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log("Google Sign-In:", result.user);
+        toast.success("Logged in with Google!");
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       })
       .catch((error) => {
-        console.error("Google login error:", error);
+        toast.error("Google login error");
       });
   };
 
