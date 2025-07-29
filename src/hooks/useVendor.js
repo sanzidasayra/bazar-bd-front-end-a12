@@ -17,7 +17,7 @@ const useVendor = () => {
     fetch(`https://bazar-bd-back-end-a12.onrender.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setIsVendor(data.role === "vendor" || data.role === "admin");
+        setIsVendor(data.role === "vendor" || data.role === "admin" || data.role === "user");
         setIsVendorLoading(false);
       })
       .catch(() => {
