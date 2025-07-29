@@ -6,10 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
-import { toast } from "react-toastify"; // <-- Import Toastify
+import { toast } from "react-toastify"; 
 
 const Register = () => {
-  const { createUser, signIn, signInWithGoogle } = useAuth(); // <-- Add signIn
+  const { createUser, signIn, signInWithGoogle } = useAuth(); 
   const navigate = useNavigate();
 
   const {
@@ -37,7 +37,6 @@ const Register = () => {
         photoURL: data.photo,
       });
 
-      // Save user to database
       const savedUser = {
         name: data.name,
         email: data.email,
@@ -53,16 +52,14 @@ const Register = () => {
         }
       );
 
-      // Immediately sign in the user after registration!
       await signIn(data.email, data.password);
 
       toast.success("Your account was created and you are now logged in!");
 
-      // Redirect to home and force refresh to load user context
       navigate("/");
       setTimeout(() => {
         window.location.reload();
-      }, 500); // 0.5 second delay (can tweak if you want)
+      }, 500); 
     } catch (error) {
       toast.error(error.message || "Registration failed");
     }
