@@ -11,11 +11,12 @@ const ViewPriceTrend = () => {
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    axiosSecure.get('/products') 
+    // Fetch all products using the new endpoint with no limit
+    axiosSecure.get('/products/all-no-limit')  // Updated endpoint
       .then(res => {
-        setProducts(res.data);
+        setProducts(res.data);  // Save all products in state
         if (res.data.length > 0) {
-          setSelectedItem(res.data[0]);
+          setSelectedItem(res.data[0]);  // Select the first item as default
         }
       })
       .catch(err => console.error(err));
@@ -66,13 +67,13 @@ const ViewPriceTrend = () => {
                 <ResponsiveContainer width="100%" height={250}>
                   <LineChart data={priceData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date"
-                    tickFormatter={date => {
-        const d = new Date(date);
-        return d.toLocaleDateString('en-US', { day: '2-digit', month: 'short' });
-      }}
-     />
-                    
+                    <XAxis
+                      dataKey="date"
+                      tickFormatter={date => {
+                        const d = new Date(date);
+                        return d.toLocaleDateString('en-US', { day: '2-digit', month: 'short' });
+                      }}
+                    />
                     <YAxis />
                     <Tooltip />
                     <Line type="monotone" dataKey="price" stroke="#2563eb" dot={{ r: 5 }} />
@@ -81,7 +82,9 @@ const ViewPriceTrend = () => {
 
                 <p className="mt-3 text-sm">
                   Trend:{' '}
-                  <span className={`font-semibold ${calculateTrend() > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                  <span
+                    className={`font-semibold ${calculateTrend() > 0 ? 'text-green-600' : 'text-red-500'}`}
+                  >
                     {calculateTrend() > 0 ? '+' : ''}
                     {calculateTrend()}% last 7 days
                   </span>
