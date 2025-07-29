@@ -72,7 +72,7 @@ const Register = () => {
         navigate("/");
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 100);
       })
       .catch((error) => {
         toast.error("Google login error");
