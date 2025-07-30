@@ -105,7 +105,7 @@ const AuthProvider = ({ children }) => {
       const saveUser = {
         name: loggedUser.displayName,
         email: loggedUser.email,
-        role: "buyer",
+        role: "user",
       };
 
       await fetch("https://bazar-bd-back-end-a12.onrender.com/users", {
