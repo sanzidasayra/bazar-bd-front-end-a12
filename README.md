@@ -10,7 +10,7 @@ BazarBD is a modern web application for tracking local market product prices, ma
 ---
 
 ## 🖼 Screenshot  
-![BazarBD Homepage](https://i.ibb.co/your-screenshot-link.png)
+![BazarBD Homepage](https://i.ibb.co.com/nqnk1c9k/Screenshot-2025-08-08-184434.png)
 
 ---
 
@@ -69,6 +69,6 @@ BazarBD is a modern web application for tracking local market product prices, ma
 
 📬 Contact
 Sanzida Sayra
-📧 Email: your-email@example.com
-🔗 LinkedIn: linkedin.com/in/sanzida-sayra
-💻 GitHub: github.com/sanzidasayra
+📧 Email: sanzidasayra@gmail.com
+🔗 LinkedIn: [linkedin.com/in/sanzida-sayra](https://www.linkedin.com/in/sanzida-sayra/)
+💻 GitHub: [github.com/sanzidasayra](https://github.com/sanzidasayra)
