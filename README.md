@@ -1,35 +1,74 @@
-# BazarBD
+# 🛒 BazarBD
 
-**BazarBD** is a modern web application for tracking local market product prices, vendor advertisements, and managing online orders. Built for fast, secure, and responsive performance.
-
-## Technologies Used
-
-- **Frontend:**
-  - React.js (with Vite)
-  - React Router
-  - Tailwind CSS (utility-first styling)
-  - React Icons
-  - React Query (TanStack Query)
-  - Stripe (for payment integration)
-  - Framer Motion (animations)
-  - Swiper.js (carousel)
-  - Toastify (notifications)
-
-- **Backend:**
-  - Node.js
-  - Express.js
-  - MongoDB (with Mongoose)
-  - Multer (file uploads)
-  - Stripe API (payment gateway)
-
-- **Authentication:**
-  - Firebase Authentication (Google & email/password)
-  - JWT (JSON Web Token) for backend security
-
-- **Other Tools:**
-  - ESLint (code linting)
-  - Vite (blazing-fast development/build tool)
+BazarBD is a modern web application for tracking local market product prices, managing vendor advertisements, and handling online orders. It’s built for **fast performance**, **secure transactions**, and **responsive design**.
 
 ---
 
-> For more info, see the project code and documentation.
+## 🌐 Live Demo  
+[🔗 Visit BazarBD](https://bazar-bd-front-end-a12.vercel.app/)
+
+---
+
+## 🖼 Screenshot  
+![BazarBD Homepage](https://i.ibb.co/your-screenshot-link.png)
+
+---
+
+## 🚀 Core Features  
+
+- 📊 **Real-time Product Price Tracking** – View updated market prices instantly  
+- 🛍 **Vendor Advertisement Management** – Vendors can post & manage ads easily  
+- 💳 **Secure Online Payments** – Stripe integration for safe transactions  
+- 📱 **Responsive UI** – Works smoothly on mobile, tablet, and desktop  
+- 🔐 **User Authentication** – Google Sign-in & Email/Password login with Firebase  
+- 🖼 **Product Image Upload** – Using Multer for backend file uploads  
+- ⚡ **Fast Performance** – Powered by Vite & optimized API calls  
+
+---
+
+## 🛠 Technologies Used  
+
+### **Frontend**
+- React.js (with Vite)  
+- React Router  
+- Tailwind CSS  
+- React Icons  
+- React Query (TanStack Query)  
+- Stripe (Payment Integration)  
+- Framer Motion (Animations)  
+- Swiper.js (Carousel)  
+- React Toastify (Notifications)  
+
+### **Backend**
+- Node.js  
+- Express.js  
+- MongoDB (with Mongoose)  
+- Multer (File Uploads)  
+- Stripe API  
+
+### **Authentication**
+- Firebase Authentication (Google & Email/Password)  
+- JWT (JSON Web Token)  
+
+### **Other Tools**
+- ESLint  
+- Vite  
+
+---
+
+## 📦 Dependencies  
+
+**Frontend:**  
+
+
+**Frontend:**  
+"react", "react-router-dom", "tailwindcss", "react-icons", "react-query","stripe", "framer-motion", "swiper", "react-toastify"
+
+**Backend:**  
+"express", "mongoose", "multer", "stripe", "jsonwebtoken", "cors", "dotenv", "firebase-admin"
+
+📬 Contact
+Sanzida Sayra
+📧 Email: your-email@example.com
+🔗 LinkedIn: linkedin.com/in/sanzida-sayra
+💻 GitHub: github.com/sanzidasayra
