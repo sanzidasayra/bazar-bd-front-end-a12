@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   FaShoppingBag, FaSignInAlt, FaUserPlus,
-  FaSignOutAlt, FaThLarge,
-  FaBackward
+  FaSignOutAlt, FaThLarge, FaHome
 } from 'react-icons/fa';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { IoHomeSharp } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/Bazarbd.jpg';
 import useAuth from '../hooks/useAuth';
 
@@ -14,28 +14,31 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isDashboard = location.pathname.startsWith('/dashboard');
 
   const handleLogout = () => {
     logOut().then(() => {});
+    setMobileOpen(false);
   };
 
+  const toggleMobileMenu = () => setMobileOpen(!mobileOpen);
+
+  // Dashboard-specific navbar
   if (isDashboard) {
     return (
-      <div className="navbar bg-gray-50 text-gray-900 px-4 shadow-md sticky top-0 z-50">
-        <div className="flex-1">
+      <div className="bg-gray-50 text-gray-900 px-4 shadow-md sticky top-0 z-50 w-full">
+        <div className="flex justify-between items-center py-2">
           <Link to="/" className="flex items-center gap-2 text-xl font-bold">
             <img src={logo} alt="logo" className="w-12 h-12 rounded-full border border-[#CAEB66]" />
             <span className="hidden sm:inline">BazarBD</span>
           </Link>
-        </div>
-        <div>
           <button
             className="btn bg-[#CAEB66] text-black"
             onClick={() => navigate('/')}
           >
-            <FaBackward /> Back to Home
+            <FaThLarge /> Back to Home
           </button>
         </div>
       </div>
@@ -43,106 +46,95 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar bg-gray-50 text-gray-900 px-4 lg:px-10 shadow-md sticky top-0 z-50">
-      <div className="flex-1">
+    <div className="bg-[#EC5800] text-gray-50 px-4 lg:px-10 shadow-md sticky top-0 z-50 w-full">
+      <div className="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-2">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 text-xl font-bold">
-          <img src={logo} alt="logo" className="w-12 h-12 rounded-full border border-[#CAEB66]" />
+          <img src={logo} alt="logo" className="w-12 h-12 rounded-full border border-black" />
           <span className="hidden sm:inline">BazarBD</span>
         </Link>
-      </div>
 
-      <div className="hidden lg:flex flex-grow justify-center">
-        <ul className="menu menu-horizontal px-1 gap-4">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => `hover:bg-[#CAEB66] text-gray-900 ${isActive ? 'bg-[#CAEB66]' : ''}`}
-            >
-              <IoHomeSharp className="inline mr-1" /> Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/all-products"
-              className={({ isActive }) => `hover:bg-[#CAEB66] text-gray-900 ${isActive ? 'bg-[#CAEB66]' : ''}`}
-            >
-              <FaShoppingBag className="inline mr-1" /> All Products
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-
-      <div className="navbar-end gap-2">
-        {user && (
-          <div className="tooltip tooltip-left" data-tip={user.displayName || "User"}>
-            <img
-              src={user.photoURL || "/default-avatar.png"}
-              alt="User"
-              className="w-10 h-10 rounded-full border border-[#CAEB66]"
-            />
-          </div>
-        )}
-
-        {!user ? (
-          <div className="hidden lg:flex gap-4">
-            <NavLink to="/login" className="btn hover:bg-[#CAEB66] text-gray-900">
-              <FaSignInAlt className="inline mr-1" /> Login
-            </NavLink>
-            <NavLink to="/signup" className="btn hover:bg-[#CAEB66] text-gray-900">
-              <FaUserPlus className="inline mr-1" /> Sign Up
-            </NavLink>
-          </div>
-        ) : (
-          <div className="hidden lg:flex gap-4">
-            <NavLink to="/dashboard" className="btn hover:bg-[#CAEB66] text-gray-900">
-              <FaThLarge className="inline mr-1" /> Dashboard
-            </NavLink>
-            <button onClick={handleLogout} className="btn text-red-600 bg-red-200 hover:bg-red-400 hover:text-black">
-              <FaSignOutAlt className="inline mr-1" /> Logout
-            </button>
-          </div>
-        )}
-
-        <div className="dropdown dropdown-end lg:hidden">
-          <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <GiHamburgerMenu className="text-2xl" />
-          </label>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow bg-[#CAEB66] rounded-box w-60 text-gray-900">
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex flex-grow justify-center">
+          <ul className="menu menu-horizontal px-1 gap-4">
             <li>
-              <NavLink to="/all-products">
+              <NavLink to="/" className={({ isActive }) => `hover:bg-black hover:text-white px-3 py-1 rounded ${isActive ? 'bg-black text-white' : ''}`}>
+                <FaHome className="inline mr-1" /> Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/all-products" className={({ isActive }) => `hover:bg-black hover:text-white px-3 py-1 rounded ${isActive ? 'bg-black text-white' : ''}`}>
                 <FaShoppingBag className="inline mr-1" /> All Products
               </NavLink>
             </li>
-            {!user ? (
-              <>
-                <li>
-                  <NavLink to="/login">
-                    <FaSignInAlt className="inline mr-1" /> Login
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/signup">
-                    <FaUserPlus className="inline mr-1" /> Sign Up
-                  </NavLink>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <NavLink to="/dashboard">
-                    <FaThLarge className="inline mr-1" /> Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <button onClick={handleLogout} className="text-red-600">
-                    <FaSignOutAlt className="inline mr-1" /> Logout
-                  </button>
-                </li>
-              </>
+            {user && (
+              <li>
+                <NavLink to="/dashboard" className={({ isActive }) => `hover:bg-black hover:text-white px-3 py-1 rounded ${isActive ? 'bg-black text-white' : ''}`}>
+                  <FaThLarge className="inline mr-1" /> Dashboard
+                </NavLink>
+              </li>
             )}
           </ul>
         </div>
+
+        {/* Desktop Auth */}
+        <div className="hidden lg:flex gap-4 items-center">
+          {!user ? (
+            <>
+              <NavLink to="/login" className="btn hover:bg-black hover:text-white text-gray-900">
+                <FaSignInAlt className="inline mr-1" /> Login
+              </NavLink>
+              <NavLink to="/signup" className="btn hover:bg-black hover:text-white text-gray-900">
+                <FaUserPlus className="inline mr-1" /> Sign Up
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <div className="tooltip tooltip-left" data-tip={user.displayName || "User"}>
+                <img src={user.photoURL || "/default-avatar.png"} alt="User" className="w-10 h-10 rounded-full border border-black" />
+              </div>
+              <button onClick={handleLogout} className="btn hover:bg-red-500 hover:text-white text-red-600 bg-red-200">
+                <FaSignOutAlt className="inline mr-1" /> Logout
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Mobile Hamburger (shows md and smaller) */}
+        <div className="flex lg:hidden">
+          <button onClick={toggleMobileMenu}>
+            {mobileOpen ? <IoClose className="text-3xl" /> : <GiHamburgerMenu className="text-3xl" />}
+          </button>
+        </div>
       </div>
+
+      </div>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="lg:hidden mt-2 bg-[#EC5800] rounded shadow-lg overflow-hidden flex flex-col gap-2"
+          >
+            <NavLink onClick={() => setMobileOpen(false)} to="/" className="hover:bg-black hover:text-white px-3 py-2 rounded">Home</NavLink>
+            <NavLink onClick={() => setMobileOpen(false)} to="/all-products" className="hover:bg-black hover:text-white px-3 py-2 rounded">All Products</NavLink>
+            {user ? (
+              <>
+                <NavLink onClick={() => setMobileOpen(false)} to="/dashboard" className="hover:bg-black hover:text-white px-3 py-2 rounded">Dashboard</NavLink>
+                <button onClick={handleLogout} className="hover:bg-red-500 hover:text-white px-3 py-2 rounded text-red-600 bg-red-200">Logout</button>
+              </>
+            ) : (
+              <>
+                <NavLink onClick={() => setMobileOpen(false)} to="/login" className="hover:bg-black hover:text-white px-3 py-2 rounded">Login</NavLink>
+                <NavLink onClick={() => setMobileOpen(false)} to="/signup" className="hover:bg-black hover:text-white px-3 py-2 rounded">Sign Up</NavLink>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
