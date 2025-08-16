@@ -142,7 +142,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className='w-11/12 sm:w-10/12 md:w-10/12 lg:w-8/12 mx-auto mt-10 p-6 rounded-xl shadow-2xl bg-[#f2fcf9] dark:bg-gray-800 dark:text-gray-100'>
+    <div className='w-11/12 sm:w-10/12 md:w-10/12 lg:w-8/12 mx-auto mt-10 p-6 rounded-xl shadow-2xl bg-gray-50 dark:bg-gray-800 dark:text-gray-100'>
   <div className='flex flex-col md:flex-row gap-6'>
     <img
       src={product.productImage}
@@ -157,7 +157,7 @@ const ProductDetails = () => {
       </p>
       <p>
         <span className='font-semibold'>Current Price:</span>{" "}
-        <span className='bg-yellow-200 dark:bg-gray-700 px-2 py-1 rounded font-bold'>
+        <span className='bg-[#EC5800] text-white dark:bg-gray-700 px-2 py-1 rounded font-bold'>
           {product.prices?.[0]?.price ? `৳${product.prices[0].price}/kg` : "N/A"}
         </span>
       </p>
@@ -206,7 +206,7 @@ const ProductDetails = () => {
 
         <button
           onClick={() => handlePay(product._id)}
-          className='flex-1 px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 dark:bg-gray-700 dark:hover:dark:bg-gray-600 text-white transition-all'
+          className='flex-1 px-4 py-2 rounded-full bg-[#EC5800] hover:bg-[#d44c00] dark:bg-gray-700 dark:hover:dark:bg-gray-600 text-white transition-all'
         >
           Buy Product
         </button>
@@ -239,7 +239,7 @@ const ProductDetails = () => {
         ></textarea>
         <button
           onClick={handleReviewSubmit}
-          className='mt-2 px-4 py-2 bg-green-700 hover:bg-green-600 dark:bg-gray-800 dark:hover:dark:bg-gray-600 text-white rounded-full'
+          className='mt-2 px-4 py-2 bg-[#EC5800] hover:bg-[#d44c00] dark:bg-gray-800 dark:hover:dark:bg-gray-600 text-white rounded-full'
         >
           Submit Review
         </button>
@@ -314,7 +314,7 @@ const ProductDetails = () => {
   <div className='mt-12 text-center'>
     <button
       onClick={() => navigate("/")}
-      className='px-6 py-2 bg-[#1a3e31]  dark:bg-gray-900 hover:bg-[#0f2a21] dark:hover:bg-gray-700 text-white rounded-full transition duration-300'
+      className='px-6 py-2 bg-[#EC5800] hover:bg-[#d44c00]  dark:bg-gray-900 dark:hover:bg-gray-700 text-white rounded-full transition duration-300'
     >
       Back to Home
     </button>

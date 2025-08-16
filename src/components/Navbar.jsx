@@ -36,7 +36,7 @@ const Navbar = () => {
             <span className="hidden sm:inline">BazarBD</span>
           </Link>
           <button
-            className="btn bg-[#CAEB66] text-black"
+            className="btn bg-[#EC5800] hover:bg-[#d44c00] text-white"
             onClick={() => navigate('/')}
           >
             <FaThLarge /> Back to Home
@@ -47,7 +47,7 @@ const Navbar = () => {
   }
 
   return (
-   <div className="bg-gradient-to-r from-[#EC5800] to-[#FFA500] dark:from-gray-900 dark:to-gray-800 text-gray-50 dark:text-gray-50 px-4 lg:px-10 shadow-md sticky top-0 z-50 w-full">
+   <div className="bg-gradient-to-r from-[#EC5800] to-[#FFA500] dark:from-gray-900 dark:to-gray-800 text-gray-50 dark:text-gray-50 px-4 lg:px-10 shadow-md fixed top-0 w-full z-50">
   <div className="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center py-2">
       {/* Logo */}

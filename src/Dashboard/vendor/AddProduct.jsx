@@ -29,8 +29,8 @@ const AddProduct = () => {
     name: "prices",
   });
 
-  const pricePerUnitValue = watch("pricePerUnit"); // ⭐
-  const pricesArray = watch("prices"); // ⭐
+  const pricePerUnitValue = watch("pricePerUnit"); 
+  const pricesArray = watch("prices"); 
 
   const [marketDate] = useState(new Date());
 
@@ -235,7 +235,7 @@ const AddProduct = () => {
         </div>
         <button
           type='submit'
-          className='w-full bg-[#CAEB66] text-black py-2 rounded-xl hover:bg-[#A3D75C]'
+          className='w-full bg-[#EC5800] hover:bg-[#d44c00] text-white py-2 rounded-xl '
         >
           Submit Product
         </button>
