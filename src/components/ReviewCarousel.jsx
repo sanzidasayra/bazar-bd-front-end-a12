@@ -32,9 +32,9 @@ const ReviewCarousel = () => {
   }
 
   return (
-    <div className="mt-10  relative">
-      <h2 className="text-3xl font-bold text-center mb-6">User Reviews</h2>
-      <p className="text-center mb-6 text-gray-600">
+    <div className="mt-20  relative">
+      <h2 className="text-3xl font-bold text-center mb-3 text-orange-400 dark:text-gray-50">User Reviews</h2>
+      <p className="text-center mb-6 text-gray-600 dark:text-gray-300 text-lg">
         See what our users are saying about the platform and their experiences.
       </p>
 
@@ -56,15 +56,15 @@ const ReviewCarousel = () => {
       >
         {reviews.map((review) => (
           <SwiperSlide key={review.id}>
-            <div className="bg-white rounded-xl shadow-2xl p-6 flex flex-col items-center text-center h-full min-h-[300px] transition-transform duration-300 ease-in-out hover:scale-105 mb-10">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 flex flex-col items-center text-center h-full min-h-[300px] transition-transform duration-300 ease-in-out hover:scale-105 mb-10">
               <img
                 src={review.image}
                 alt={review.name}
-                className="w-20 h-20 rounded-full object-cover mb-4 border-4 border-orange-400 transition-transform duration-300 ease-in-out"
+                className="w-20 h-20 rounded-full object-cover mb-4 border-4 border-orange-400 dark:border-gray-300 transition-transform duration-300 ease-in-out"
               />
               <div className="flex flex-col justify-between h-full">
                 <h3 className="text-lg font-semibold mb-2">{review.name}</h3>
-                <p className="text-gray-700 text-sm md:text-base">{review.comment}</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm md:text-base">{review.comment}</p>
               </div>
             </div>
           </SwiperSlide>

@@ -48,12 +48,12 @@ const ProductSection = () => {
   return (
     <div>
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold mb-2 text-[#1a3e31] flex justify-center items-center gap-2 dark:text-gray-50">
+        <h2 className="text-5xl font-bold mb-2 text-[#EC5800] flex justify-center items-center gap-2 dark:text-gray-50">
           <FaShoppingBasket className="inline text-[#EC5800] dark:text-gray-50" />{" "}
           Featured Products
         </h2>
         <p className="text-base md:text-lg max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-          Discover today’s best prices for essentials at <strong>BazarBD</strong>.
+          Discover today’s best prices for essentials at <strong className="text-[#EC5800]">BazarBD</strong>.
           <br />
           See what’s fresh, trending, and a great deal!
         </p>

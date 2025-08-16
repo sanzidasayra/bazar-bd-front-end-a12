@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import "swiper/css";
-import "swiper/css/navigation";
 import Spinner from "../../components/Shared/Spinner";
 
-const AdvertisementCarousel = () => {
+const AdvertisementMarquee = () => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,73 +23,61 @@ const AdvertisementCarousel = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center mt-10"> <Spinner /> </div>;
+    return (
+      <div className="text-center mt-10">
+        <Spinner />
+      </div>
+    );
   }
 
   return (
-    <div className="mt-10 px-4 relative">
-      <h2 className="text-3xl font-bold text-center mb-6">
+    <div className="mt-20 px-4">
+      <h2 className="text-4xl font-bold text-center mb-3 text-[#EC5800] dark:text-gray-50">
         Advertisement Highlights
       </h2>
-      <p className="text-center mb-6">
+      <p className="text-center mb-6 text-lg">
         Explore all current promotions and vendor ads through this interactive
-        carousel. All advertisements are dynamically loaded from the database.
+        scrolling banner. All advertisements are dynamically loaded from the
+        database.
       </p>
 
-      {/* Custom Arrows */}
-      <div className="absolute inset-y-1/2 left-0 z-10 -translate-y-1/2">
-        <button className="swiper-button-prev !text-orange-500 hover:!text-orange-600 text-3xl bg-transparent">
-          <FaArrowLeft />
-        </button>
-      </div>
-      <div className="absolute inset-y-1/2 right-0 z-10 -translate-y-1/2">
-        <button className="swiper-button-next !text-orange-500 hover:!text-orange-600 text-3xl bg-transparent">
-          <FaArrowRight />
-        </button>
-      </div>
-
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={1}
-        loop={true}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          640: { slidesPerView: 1 },   // mobile
-          768: { slidesPerView: 2 },   // tablet
-          1024: { slidesPerView: 3 },  // laptop
-          1280: { slidesPerView: 4 },  // desktop (4 cards)
-        }}
-        modules={[Navigation, Autoplay]}
-      >
-        {ads.map((ad) => (
-          <SwiperSlide key={ad._id}>
-            <div className="bg-white rounded-lg shadow-lg p-4 h-full flex flex-col">
+      <div className="overflow-hidden relative">
+        <div className="flex animate-marquee space-x-6">
+          {ads.map((ad) => (
+            <div
+              key={ad._id}
+              className="flex-shrink-0 w-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex"
+            >
               <img
                 src={ad.image}
                 alt={ad.adTitle}
-                className="w-full h-40 object-cover rounded-lg mb-3"
+                className="w-32 h-32 object-cover rounded-lg mr-4"
               />
-              <h3 className="text-lg font-bold mb-1">{ad.adTitle}</h3>
-              <p className="text-gray-600 text-sm flex-grow">{ad.description}</p>
-              <a
-                href="#"
-                className="text-blue-500 mt-3 inline-block font-medium hover:underline"
-              >
-                Learn More →
-              </a>
+              <div className="flex flex-col justify-center">
+                <h3 className="text-lg font-bold mb-1">{ad.adTitle}</h3>
+                <p className="text-gray-600 dark:text-gray-200 text-sm">
+                  {ad.description}
+                </p>
+              </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </div>
+      </div>
+
+      <style>
+        {`
+          @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .animate-marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+          }
+        `}
+      </style>
     </div>
   );
 };
 
-export default AdvertisementCarousel;
+export default AdvertisementMarquee;

@@ -6,6 +6,8 @@ import MyProducts from '../../Dashboard/vendor/MyProducts';
 import ProductSection from './ProductSection';
 import AdvertisementCarousel from './AdvertisementCarousel';
 import ReviewCarousel from '../../components/ReviewCarousel';
+import Newsletter from './NewsLetter';
+import CategoriesSection from './CategoriesSection';
 
 
 const Home = () => {
@@ -16,8 +18,10 @@ const Home = () => {
             
             <ProductSection />
             <AdvertisementCarousel />
+            <CategoriesSection />
             <RisingFallingPrices />
             <MarketTips />
+            <Newsletter />
         </div>
             <ReviewCarousel />
         </>
