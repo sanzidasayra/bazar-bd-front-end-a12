@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import banner1 from "../../assets/banner1.jpeg";
-import banner2 from "../../assets/banner2.jpeg";
-import banner3 from "../../assets/banner3.jpeg";
-import banner4 from "../../assets/banner4.jpg";
+import Bashmati from "../../assets/basmati rice.jpg";
+import Meats from "../../assets/meats.jpg";
+import Vegies from "../../assets/vegies.avif";
+import Fish from "../../assets/fish.webp";
 
 const slides = [
   {
-    image: banner1,
+    image: Vegies,
     title: "Fresh Vegetables Everyday",
     desc: "Get farm-fresh veggies directly from your local markets at unbeatable prices."
   },
   {
-    image: banner2,
+    image: Meats,
     title: "Premium Quality Meat",
     desc: "Taste the difference with fresh, hygienic, and tender meat products."
   },
   {
-    image: banner3,
+    image: Fish,
     title: "Fresh Catch from the River",
     desc: "Delight in the authentic flavor of locally caught fish every day."
   },
   {
-    image: banner4,
+    image: Bashmati,
     title: "Best Rice Varieties",
     desc: "From premium aromatic rice to daily essentials, all at affordable rates."
   },
@@ -41,7 +41,7 @@ const BannerSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden rounded-b-4xl shadow-lg mb-20">
+    <div className="relative w-full h-[700px] overflow-hidden rounded-b-4xl shadow-lg mb-20">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -56,7 +56,7 @@ const BannerSlider = () => {
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="bg-black bg-opacity-50 p-6 rounded-xl max-w-2xl">
+          <div className="bg-[#EC5800] dark:bg-gray-700 bg-opacity-50 p-6 rounded-xl max-w-2xl">
             <h2 className="text-4xl font-bold text-white mb-3">{slides[current].title}</h2>
             <p className="text-lg text-gray-200">{slides[current].desc}</p>
           </div>
