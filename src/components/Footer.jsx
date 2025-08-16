@@ -5,7 +5,7 @@ import logo from '../assets/Bazarbd.jpg'
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#EC5800] to-[#FFA500] dark:from-gray-900 dark:to-gray-800 text-white py-10 px-4 md:px-10 mt-10">
+    <footer className="bg-gradient-to-r from-[#EC5800] to-[#FFA500] dark:from-gray-900 dark:to-gray-800 text-white py-10 px-4 md:px-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         
        

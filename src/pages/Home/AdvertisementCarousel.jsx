@@ -43,12 +43,12 @@ const AdvertisementCarousel = () => {
 
       {/* Custom Arrows */}
       <div className="absolute inset-y-1/2 left-0 z-10 -translate-y-1/2">
-        <button className="swiper-button-prev text-white">
+        <button className="swiper-button-prev !text-orange-500 hover:!text-orange-600 text-3xl bg-transparent">
           <FaArrowLeft />
         </button>
       </div>
       <div className="absolute inset-y-1/2 right-0 z-10 -translate-y-1/2">
-        <button className="swiper-button-next text-white">
+        <button className="swiper-button-next !text-orange-500 hover:!text-orange-600 text-3xl bg-transparent">
           <FaArrowRight />
         </button>
       </div>

@@ -5,6 +5,7 @@ import RisingFallingPrices from './RisingFallingPrices';
 import MyProducts from '../../Dashboard/vendor/MyProducts';
 import ProductSection from './ProductSection';
 import AdvertisementCarousel from './AdvertisementCarousel';
+import ReviewCarousel from '../../components/ReviewCarousel';
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             <RisingFallingPrices />
             <MarketTips />
         </div>
+            <ReviewCarousel />
         </>
     );
 };
