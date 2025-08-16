@@ -1,103 +1,82 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import { motion } from 'framer-motion';
-import tomato from '../../assets/tomato.webp';
-import mutton from '../../assets/mutton.jpg';
+import React, { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
+import banner1 from "../../assets/banner1.jpeg";
+import banner2 from "../../assets/banner2.jpeg";
+import banner3 from "../../assets/banner3.jpeg";
+import banner4 from "../../assets/banner4.jpg";
 
-const TypingEffect = () => {
-  const text = "Explore Fresh Local Market Prices!!";
-  const letters = text.split("");
+const slides = [
+  {
+    image: banner1,
+    title: "Fresh Vegetables Everyday",
+    desc: "Get farm-fresh veggies directly from your local markets at unbeatable prices."
+  },
+  {
+    image: banner2,
+    title: "Premium Quality Meat",
+    desc: "Taste the difference with fresh, hygienic, and tender meat products."
+  },
+  {
+    image: banner3,
+    title: "Fresh Catch from the River",
+    desc: "Delight in the authentic flavor of locally caught fish every day."
+  },
+  {
+    image: banner4,
+    title: "Best Rice Varieties",
+    desc: "From premium aromatic rice to daily essentials, all at affordable rates."
+  },
+  
+];
+
+const BannerSlider = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <motion.div
-      className="text-4xl font-bold text-center mb-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      {letters.map((letter, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.05 }}
-        >
-          {letter}
-        </motion.span>
-      ))}
-    </motion.div>
-  );
-};
-
-const Banner = () => {
-  return (
-    <motion.div
-      className="flex flex-col lg:flex-row items-center justify-between bg-[#daffe7] p-10 rounded-b-4xl shadow-lg mb-20"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5 }}
-    >
-      <div className="lg:w-1/2 p-6 text-center">
-        <motion.h1
-          className="text-4xl font-bold text-[#03373D]"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <TypingEffect />
-        </motion.h1>
-        <motion.p
-          className="text-xl text-[#03373D]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          Discover fresh, local produce at unbeatable prices. Stay updated with real-time trends on fruits, vegetables, meats, and daily essentials. Make informed choices and save more every time!
-        </motion.p>
-      </div>
-
-      <div className="lg:w-1/2 flex justify-center relative">
+    <div className="relative w-full h-[500px] overflow-hidden rounded-b-4xl shadow-lg mb-20">
+      <AnimatePresence mode="wait">
         <motion.div
-          className="relative"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
+          key={current}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center p-6"
+          style={{
+            backgroundImage: `url(${slides[current].image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.img
-            src={tomato}
-            alt="Tomato"
-            className="max-w-sm border-8 border-[#03373D] rounded-t-[40px] rounded-br-[40px] shadow-2xl transform hover:scale-105 transition-all duration-500"
-            animate={{
-              y: [10, -10, 10],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              repeatType: 'loop',
-              ease: 'easeInOut',
-            }}
-          />
-
-          <motion.img
-            src={mutton}
-            alt="Mutton"
-            className="max-w-sm border-8 border-[#03373D] rounded-t-[40px] rounded-br-[40px] shadow-2xl transform hover:scale-105 transition-all duration-500 mt-10"
-            animate={{
-              x: [100, -100, 100],
-              rotate: [0, 10, -10],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              repeatType: 'loop',
-              ease: 'easeInOut',
-            }}
-          />
+          <div className="bg-black bg-opacity-50 p-6 rounded-xl max-w-2xl">
+            <h2 className="text-4xl font-bold text-white mb-3">{slides[current].title}</h2>
+            <p className="text-lg text-gray-200">{slides[current].desc}</p>
+          </div>
         </motion.div>
+      </AnimatePresence>
+
+      {/* Dots Navigation */}
+      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrent(idx)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              idx === current ? "bg-white scale-125" : "bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-export default Banner;
+export default BannerSlider;

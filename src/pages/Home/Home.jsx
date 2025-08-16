@@ -9,13 +9,16 @@ import AdvertisementCarousel from './AdvertisementCarousel';
 
 const Home = () => {
     return (
+        <>
+        <Banner />
         <div className="w-11/12 sm:w-10/12 md:w-10/12 lg:w-8/12 mx-auto">
-            <Banner />
+            
             <ProductSection />
             <AdvertisementCarousel />
             <RisingFallingPrices />
             <MarketTips />
         </div>
+        </>
     );
 };
 
