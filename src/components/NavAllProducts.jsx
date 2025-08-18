@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ useLocation add
 import useAuth from "../hooks/useAuth";
-import SkeletonCard from "./SkeletonCard"; // import Skeleton
+import SkeletonCard from "./SkeletonCard";
 
 const NavAllProducts = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // add loading state
+  const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -15,18 +15,27 @@ const NavAllProducts = () => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation(); // ✅ get query params
 
   const numberOfPages = Math.ceil(totalCount / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
 
+  // ✅ query params theke category catch
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category");
+
   useEffect(() => {
-    setLoading(true); // start loading
+    setLoading(true);
     let url = `https://bazar-bd-back-end-a12.onrender.com/products/search?status=approved&page=${currentPage}&size=${itemsPerPage}`;
+    
     if (sortOrder) url += `&sort=${sortOrder}`;
     if (dateFrom && dateTo) {
       url += `&from=${dateFrom}&to=${dateTo}`;
     } else if (dateFrom) {
       url += `&date=${dateFrom}`;
+    }
+    if (category) {
+      url += `&category=${category}`; // ✅ category filter add
     }
 
     fetch(url)
@@ -34,10 +43,12 @@ const NavAllProducts = () => {
       .then((data) => {
         setProducts(data.products || []);
         setTotalCount(data.total || 0);
+        console.log("Fetching URL:", url);
+
       })
       .catch((err) => console.error(err))
-      .finally(() => setLoading(false)); // stop loading
-  }, [sortOrder, dateFrom, dateTo, currentPage]);
+      .finally(() => setLoading(false));
+  }, [sortOrder, dateFrom, dateTo, currentPage, category]); // ✅ category dependency add
 
   const handleViewDetails = (id) => {
     if (!user) navigate("/login");
@@ -57,7 +68,7 @@ const NavAllProducts = () => {
   return (
     <div className="p-4 max-w-7xl mx-auto mt-15">
       <h2 className="text-3xl font-bold text-center mb-6 dark:text-gray-100">
-        All Market Products
+        {category ? `Products in ${category}` : "All Market Products"} {/* ✅ heading update */}
       </h2>
 
       {/* Filters */}

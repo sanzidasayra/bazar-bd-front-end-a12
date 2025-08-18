@@ -164,36 +164,43 @@ const AllProducts = () => {
       </div>
 
       <div className="flex justify-center mt-8 gap-2 flex-wrap">
-        <button
-          onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 0}
-          className="px-3 py-1 border rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-white"
-        >
-          Previous
-        </button>
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={`px-3 py-1 border rounded ${
-              currentPage === page
-                ? "bg-blue-500 text-white dark:bg-blue-700"
-                : "bg-gray-100 dark:bg-gray-700 text-white"
-            }`}
-          >
-            {page + 1}
-          </button>
-        ))}
-        <button
-          onClick={() =>
-            currentPage < numberOfPages - 1 && setCurrentPage(currentPage + 1)
-          }
-          disabled={currentPage >= numberOfPages - 1}
-          className="px-3 py-1 border rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-white"
-        >
-          Next
-        </button>
-      </div>
+  <button
+    onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
+    disabled={currentPage === 0}
+    className="px-3 py-1 border rounded 
+               bg-gray-100 hover:bg-gray-200 text-gray-800
+               dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
+  >
+    Previous
+  </button>
+
+  {pages.map((page) => (
+    <button
+      key={page}
+      onClick={() => setCurrentPage(page)}
+      className={`px-3 py-1 border rounded 
+        ${
+          currentPage === page
+            ? "bg-blue-500 text-white dark:bg-blue-700"
+            : "bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
+        }`}
+    >
+      {page + 1}
+    </button>
+  ))}
+
+  <button
+    onClick={() =>
+      currentPage < numberOfPages - 1 && setCurrentPage(currentPage + 1)
+    }
+    disabled={currentPage >= numberOfPages - 1}
+    className="px-3 py-1 border rounded 
+               bg-gray-100 hover:bg-gray-200 text-gray-800
+               dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
+  >
+    Next
+  </button>
+</div>
 
       <RejectReasonModal
         isOpen={showRejectModal}

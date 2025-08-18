@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CategoriesSection = () => {
   const [categories, setCategories] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(5); 
-  const initialCount = 5; 
+  const [visibleCount, setVisibleCount] = useState(5);
+  const initialCount = 5;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const data = [
@@ -20,10 +22,14 @@ const CategoriesSection = () => {
 
   const handleToggle = () => {
     if (visibleCount === categories.length) {
-      setVisibleCount(initialCount); 
+      setVisibleCount(initialCount);
     } else {
       setVisibleCount(categories.length);
     }
+  };
+
+  const handleCategoryClick = (catTitle) => {
+    navigate(`/all-products?category=${catTitle}`);
   };
 
   return (
@@ -40,12 +46,14 @@ const CategoriesSection = () => {
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-6">
           {categories.slice(0, visibleCount).map((cat) => (
             <div
-              key={cat.id}
-              className="bg-white dark:bg-gray-600 shadow-xl rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer min-h-[180px]"
-            >
-              <img src={cat.image} alt={cat.title} className="w-full h-32 object-cover"/>
-              <h3 className="text-center font-semibold text-lg p-2 dark:text-gray-100">{cat.title}</h3>
-            </div>
+  key={cat.id}
+  onClick={() => navigate(`/all-products?category=${cat.value}`)} // ✅ value should match DB
+  className="bg-white dark:bg-gray-600 shadow-xl rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer min-h-[180px]"
+>
+  <img src={cat.image} alt={cat.title} className="w-full h-32 object-cover"/>
+  <h3 className="text-center font-semibold text-lg p-2 dark:text-gray-100">{cat.title}</h3>
+</div>
+
           ))}
         </div>
 
