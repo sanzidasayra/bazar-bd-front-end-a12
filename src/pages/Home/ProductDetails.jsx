@@ -89,12 +89,13 @@ const ProductDetails = () => {
   };
 
   if (loading) {
-    return (
-      <div className='text-center mt-10 text-xl'>
-        <span className='loading loading-spinner loading-lg'></span>
-      </div>
-    );
-  }
+  return (
+    <div className='flex items-center justify-center min-h-screen'>
+      <span className='loading loading-spinner loading-lg'></span>
+    </div>
+  );
+}
+
 
   if (!product) {
     return (

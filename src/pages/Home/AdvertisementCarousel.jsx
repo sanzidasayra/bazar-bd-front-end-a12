@@ -27,12 +27,14 @@ const AdvertisementMarquee = () => {
         Advertisement Highlights
       </h2>
       <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
-        Explore all current promotions and vendor ads through this interactive
-        scrolling banner. All advertisements are dynamically loaded from the
-        database.
-      </p>
+  Discover exclusive vendor promotions and seasonal highlights in this
+  scrolling banner. Stay updated with the latest market deals and
+  advertisements.
+</p>
 
-      <div className="overflow-hidden relative">
+
+
+      <div className="overflow-hidden relative w-full">
         {loading ? (
           // Skeleton loader
           <div className="flex space-x-6 animate-pulse">
@@ -51,18 +53,18 @@ const AdvertisementMarquee = () => {
             ))}
           </div>
         ) : (
-          // Actual ads
+          // Actual ads marquee (duplicated for infinite loop)
           <div className="flex animate-marquee space-x-6">
-            {ads.map((ad) => (
+            {[...ads, ...ads].map((ad, idx) => (
               <div
-                key={ad._id}
+                key={idx}
                 className="flex-shrink-0 w-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex"
               >
-       <img
-  src={ad.imageUrl}
-  alt={ad.adTitle}
-  className="w-32 h-32 object-cover rounded-lg mr-4"
-/>
+                <img
+                  src={ad.imageUrl}
+                  alt={ad.adTitle}
+                  className="w-32 h-32 object-cover rounded-lg mr-4"
+                />
                 <div className="flex flex-col justify-center">
                   <h3 className="text-lg font-bold mb-1">{ad.adTitle}</h3>
                   <p className="text-gray-600 dark:text-gray-200 text-sm">
@@ -78,12 +80,13 @@ const AdvertisementMarquee = () => {
       <style>
         {`
           @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
           }
           .animate-marquee {
             display: flex;
             animation: marquee 20s linear infinite;
+            width: max-content;
           }
         `}
       </style>
