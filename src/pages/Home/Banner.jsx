@@ -56,10 +56,16 @@ const BannerSlider = () => {
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="bg-[#EC5800] dark:bg-gray-700 bg-opacity-50 p-6 rounded-xl max-w-2xl">
-            <h2 className="text-4xl font-bold text-white mb-3">{slides[current].title}</h2>
-            <p className="text-lg text-gray-200">{slides[current].desc}</p>
-          </div>
+          <div className="bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm border border-white/20 dark:border-gray-200/20 p-6 rounded-xl max-w-2xl">
+<h2 className="text-4xl font-bold mb-3 text-white 
+    [text-shadow:2px_2px_0_#000]">
+  {slides[current].title}
+</h2>
+<p className="text-lg text-white/90 bg-black/20 px-2 py-1 rounded">
+  {slides[current].desc}
+</p>
+</div>
+
         </motion.div>
       </AnimatePresence>
 

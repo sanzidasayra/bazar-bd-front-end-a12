@@ -19,22 +19,23 @@ const AddAds = () => {
   // Live preview fields
   const adTitle = watch("adTitle") || "";
   const description = watch("description") || "";
+  const imageUrl = watch("imageUrl") || "";
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("adTitle", data.adTitle);
-    formData.append("description", data.description);
-    formData.append("vendorEmail", user.email);
-    if (data.image?.[0]) {
-      formData.append("image", data.image[0]); 
-    }
+    const adData = {
+      adTitle: data.adTitle,
+      description: data.description,
+      vendorEmail: user.email,
+      imageUrl: data.imageUrl,
+    };
 
     try {
       const res = await fetch(
         "https://bazar-bd-back-end-a12.onrender.com/advertisements",
         {
           method: "POST",
-          body: formData, 
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(adData),
         }
       );
 
@@ -93,22 +94,20 @@ const AddAds = () => {
             )}
           </div>
 
-          {/* ✅ Image Upload */}
+          {/* ✅ Image URL Input */}
           <div>
             <label className="block text-sm font-semibold mb-1 text-[#52616B]">
-              Upload Ad Image
+              Ad Image URL
             </label>
             <input
-              type="file"
-              accept="image/*"
-              {...register("image", { required: true })}
+              type="url"
+              {...register("imageUrl", { required: true })}
+              placeholder="https://example.com/image.jpg"
               className="w-full border border-[#d0e1f9] p-3 rounded-lg bg-gray-50"
-              onChange={(e) =>
-                setPreviewImage(URL.createObjectURL(e.target.files[0]))
-              }
+              onChange={(e) => setPreviewImage(e.target.value)}
             />
-            {errors.image && (
-              <span className="text-red-500 text-xs">Image is required</span>
+            {errors.imageUrl && (
+              <span className="text-red-500 text-xs">Image URL is required</span>
             )}
           </div>
 
@@ -122,7 +121,7 @@ const AddAds = () => {
 
         {/* Live Preview Section */}
         <div className="flex-1">
-          <div className="bg-gradient-to-br from-[#faffee] to-[#e7f6d5] shadow-xl rounded-xl p-5 border border-[#EC5800]">
+          <div className="bg-gradient-to-br from-[#fffaee] to-[#e7f6d5] shadow-xl rounded-xl p-5 border border-[#EC5800]">
             <div className="flex items-center mb-3 gap-2">
               <FcAdvertising size={30} />
               <span className="font-bold text-[#03373D] text-lg">

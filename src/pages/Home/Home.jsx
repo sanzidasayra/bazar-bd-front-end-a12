@@ -1,13 +1,11 @@
 import React from 'react';
 import Banner from './Banner';
-import MarketTips from './MarketTips';
-import RisingFallingPrices from './RisingFallingPrices';
-import MyProducts from '../../Dashboard/vendor/MyProducts';
 import ProductSection from './ProductSection';
 import AdvertisementCarousel from './AdvertisementCarousel';
 import ReviewCarousel from '../../components/ReviewCarousel';
 import Newsletter from './NewsLetter';
 import CategoriesSection from './CategoriesSection';
+import HowItWorks from './HowItWorks';
 
 
 const Home = () => {
@@ -19,8 +17,7 @@ const Home = () => {
             <ProductSection />
             <AdvertisementCarousel />
             <CategoriesSection />
-            <RisingFallingPrices />
-            <MarketTips />
+            <HowItWorks />
             <Newsletter />
         </div>
             <ReviewCarousel />

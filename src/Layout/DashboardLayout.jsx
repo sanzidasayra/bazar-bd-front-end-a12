@@ -11,6 +11,8 @@ import { FaShopify } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthContext"; 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Spinner from "../components/Shared/Spinner";
+import { MdEmail } from "react-icons/md";
 
 const DashboardLayout = () => {
   const { role, loading } = useContext(AuthContext);
@@ -18,7 +20,7 @@ const DashboardLayout = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <span className="text-xl font-semibold">Loading dashboard...</span>
+        <span className="text-xl font-semibold"> <Spinner /> </span>
       </div>
     );
   }
@@ -43,6 +45,11 @@ const DashboardLayout = () => {
       to: "/dashboard/admin/all-ads",
       icon: <FcAdvertising size={24} className="text-lg" />,
       text: "All Advertisements",
+    },
+    {
+      to: "/dashboard/admin/newsletter-subscribers",
+      icon: <MdEmail size={24} className="text-lg" />,
+      text: "Newsletter Subscribers",
     },
   ];
 

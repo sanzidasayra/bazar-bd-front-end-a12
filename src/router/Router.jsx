@@ -28,6 +28,8 @@ import ProductDetails from "../pages/Home/ProductDetails";
 import NavAllProducts from "../components/NavAllProducts";
 import Payment from "../pages/Home/Payment/Payment";
 import ErrorPage from "../components/ErrorPage";
+import Newsletter from "../pages/Home/NewsLetter";
+import AdminNewsletter from "../components/AdminNewsletter";
 
 
 
@@ -110,6 +112,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
            <AllOrder />
+          </AdminRoute>
+        )
+      },
+      {
+        path: 'admin/newsletter-subscribers',
+        element: (
+          <AdminRoute>
+            <AdminNewsletter />
           </AdminRoute>
         )
       },

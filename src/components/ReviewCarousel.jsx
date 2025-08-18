@@ -32,7 +32,7 @@ const ReviewCarousel = () => {
   }
 
   return (
-    <div className="mt-20  relative">
+    <div className="mt-20 relative">
       <h2 className="text-3xl font-bold text-center mb-3 text-orange-400 dark:text-gray-50">User Reviews</h2>
       <p className="text-center mb-6 text-gray-600 dark:text-gray-300 text-lg">
         See what our users are saying about the platform and their experiences.
@@ -47,8 +47,8 @@ const ReviewCarousel = () => {
           disableOnInteraction: false,
         }}
         breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
           1024: { slidesPerView: 3 },
           1280: { slidesPerView: 5 },
         }}
