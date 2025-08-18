@@ -24,7 +24,7 @@ const MyAds = () => {
       if (!res.ok) throw new Error("Fetch failed");
       const data = await res.json();
       setAds(data);
-      // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     } catch (err) {
       toast.error("Failed to load advertisements");
     }
@@ -70,15 +70,17 @@ const MyAds = () => {
 
   return (
     <div className='max-w-6xl mx-auto p-4'>
-      <h2 className='text-3xl font-semibold mb-6 text-gray-800'>
+      <h2 className='text-3xl font-semibold mb-6 text-gray-800 dark:text-white text-center mt-10'>
         My Advertisements
       </h2>
 
       {ads.length === 0 ? (
-        <p className='text-center text-gray-500'>No advertisements found.</p>
+        <p className='text-center text-gray-500 dark:text-gray-400'>
+          No advertisements found.
+        </p>
       ) : (
-        <div className='overflow-x-auto shadow-lg rounded-lg border border-gray-200'>
-          <table className='w-full text-sm text-gray-700'>
+        <div className='overflow-x-auto shadow-lg rounded-lg border border-gray-200 dark:border-gray-700'>
+          <table className='w-full text-sm text-gray-700 dark:text-gray-200'>
             <thead className='bg-gradient-to-r from-blue-500 to-teal-500 text-white'>
               <tr>
                 <th className='p-3 text-left'>Title</th>
@@ -87,24 +89,24 @@ const MyAds = () => {
                 <th className='p-3 text-center'>Actions</th>
               </tr>
             </thead>
-            <tbody className='bg-white'>
+            <tbody className='bg-white dark:bg-gray-800'>
               {ads.map((ad) => (
                 <tr
                   key={ad._id}
-                  className='border-b hover:bg-gray-50 transition duration-300'
+                  className='border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-300'
                 >
                   <td className='p-3'>{ad.adTitle}</td>
                   <td className='p-3'>{ad.description}</td>
                   <td className='p-3 capitalize'>{ad.status}</td>
                   <td className='p-3 text-center flex justify-center gap-4'>
                     <button
-                      className='text-blue-600 hover:text-blue-800 transition duration-200'
+                      className='text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition duration-200'
                       onClick={() => handleUpdateClick(ad)}
                     >
                       <FaEdit size={24} />
                     </button>
                     <button
-                      className='text-red-600 hover:text-red-800 transition duration-200'
+                      className='text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200 transition duration-200'
                       onClick={() => handleDelete(ad)}
                     >
                       <FaTrash size={20} />
@@ -119,8 +121,8 @@ const MyAds = () => {
 
       {showModal && selectedAd && (
         <div className='fixed inset-0 flex justify-center items-center z-50'>
-          <div className='absolute inset-0 bg-gray-900 opacity-30' />
-          <div className='relative z-10 bg-white rounded-lg shadow-lg p-6 max-w-lg w-full'>
+          <div className='absolute inset-0 bg-gray-900 dark:bg-gray-900 opacity-30' />
+          <div className='relative z-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-lg w-full'>
             <UpdateAdModal
               ad={selectedAd}
               closeModal={() => {

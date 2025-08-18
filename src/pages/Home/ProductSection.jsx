@@ -70,6 +70,8 @@ const ProductSection = () => {
                       <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
                         {product.itemName}
                       </h3>
+                      
+
                       <div className="flex items-center gap-2 mb-2">
                         <FaMapMarkerAlt className="text-green-600 dark:text-gray-400" />
                         <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">

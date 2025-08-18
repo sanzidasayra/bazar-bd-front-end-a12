@@ -53,13 +53,14 @@ const AddAds = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-white shadow-2xl rounded-xl">
-      <h2 className="text-3xl font-extrabold mb-7 text-center flex items-center justify-center gap-2 text-[#3c3c6e]">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+      <div className="max-w-2xl mx-auto p-8 bg-white shadow-2xl rounded-xl dark:bg-gray-800">
+      <h2 className="text-3xl font-extrabold mb-7 text-center flex items-center justify-center gap-2 text-[#3c3c6e] dark:text-white">
         <FcAdvertising size={38} /> Post Your Market Ad!
       </h2>
       <div className="flex flex-col md:flex-row gap-6">
         {/* Form Section */}
-        <form onSubmit={handleSubmit(onSubmit)} className="flex-1 space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex-1 space-y-5 dark:bg-gray-900 p-5 rounded-xl shadow-lg">
           <div>
             <label className="block text-sm font-semibold mb-1 text-[#52616B]">
               Advertisement Title
@@ -67,7 +68,7 @@ const AddAds = () => {
             <input
               {...register("adTitle", { required: true, minLength: 4 })}
               placeholder="e.g. Fresh Mangoes in Stock!"
-              className="w-full border border-[#d0e1f9] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EC5800]"
+              className="w-full border border-[#d0e1f9] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EC5800] dark:bg-gray-700"
               maxLength={50}
             />
             {errors.adTitle && (
@@ -84,7 +85,7 @@ const AddAds = () => {
             <textarea
               {...register("description", { required: true, minLength: 10 })}
               placeholder="Write a short, catchy ad description..."
-              className="w-full border border-[#d0e1f9] p-3 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-[#EC5800]"
+              className="w-full border border-[#d0e1f9] p-3 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-[#EC5800] dark:bg-gray-700 "
               maxLength={150}
             />
             {errors.description && (
@@ -103,7 +104,7 @@ const AddAds = () => {
               type="url"
               {...register("imageUrl", { required: true })}
               placeholder="https://example.com/image.jpg"
-              className="w-full border border-[#d0e1f9] p-3 rounded-lg bg-gray-50"
+              className="w-full border border-[#d0e1f9] p-3 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none  focus:ring-2 "
               onChange={(e) => setPreviewImage(e.target.value)}
             />
             {errors.imageUrl && (
@@ -113,18 +114,20 @@ const AddAds = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#EC5800] hover:bg-[#d44c00] text-white font-bold py-3 rounded-lg transition"
+            className="w-full bg-[#EC5800] hover:bg-[#d44c00] text-white font-bold py-3 rounded-lg transition dark:bg-gray-600 dark:hover:bg-gray-500 shadow-lg "
           >
             Submit Advertisement
           </button>
         </form>
 
         {/* Live Preview Section */}
-        <div className="flex-1">
-          <div className="bg-gradient-to-br from-[#fffaee] to-[#e7f6d5] shadow-xl rounded-xl p-5 border border-[#EC5800]">
-            <div className="flex items-center mb-3 gap-2">
+        <div className="flex-1 dark:bg-gray-900 p-5 rounded-xl shadow-lg">
+          <div className="bg-white shadow-xl rounded-xl p-5 border border-[#EC5800] 
+                dark:bg-gray-800 dark:border-gray-700">
+
+            <div className="flex items-center mb-3 gap-2 ">
               <FcAdvertising size={30} />
-              <span className="font-bold text-[#03373D] text-lg">
+              <span className="font-bold text-[#03373D] dark:text-white text-lg">
                 Ad Preview
               </span>
             </div>
@@ -171,7 +174,10 @@ const AddAds = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
 export default AddAds;
+
+

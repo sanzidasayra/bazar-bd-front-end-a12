@@ -7,25 +7,24 @@ const DashboardHome = () => {
   if (loading) return <div className="dashboard-loading">Loading...</div>;
   if (!user) return <div className="dashboard-login">Please log in to access your dashboard.</div>;
 
- 
-
   return (
-    <div className="dashboard-home" style={{
-      maxWidth: 480,
-      margin: "40px auto",
-      padding: "32px",
-      background: "#fff",
-      borderRadius: "16px",
-      boxShadow: "0 2px 16px #0001"
-    }}>
-      <h1 style={{ fontWeight: 700, fontSize: 28, marginBottom: 12 }}>
-        Welcome, {user.displayName || user.email || "User"}!
-      </h1>
-      <div style={{ marginBottom: 18 }}>
-        <span style={{ fontWeight: 500 }}>Email:</span> <span style={{ color: "#4C4CFF" }}>{user.email}</span><br />
-        <span style={{ fontWeight: 500 }}>Role:</span> <span style={{ textTransform: "capitalize" }}>{role || "user"}</span>
+    <div className="flex justify-center  dark:bg-gray-800 min-h-screen pt-10 pb-200">
+      <div className="max-w-md w-full p-8 rounded-2xl shadow-md bg-white dark:bg-gray-700 transition-colors duration-300">
+        <h1 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white transition-colors duration-300">
+          Welcome, {user.displayName || user.email || "User"}!
+        </h1>
+        <div className="mb-4 text-gray-400 dark:text-gray-300 transition-colors duration-300">
+          <p>
+            <span className="font-medium">Email:</span>{" "}
+            <span className="text-blue-500">{user.email}</span>
+          </p>
+          <p>
+            <span className="font-medium">Role:</span>{" "}
+            <span className="capitalize">{role || "user"}</span>
+          </p>
+        </div>
+        <hr className="border-gray-200 dark:border-gray-600 my-7" />
       </div>
-      <hr style={{ margin: "16px 0 28px 0", borderColor: "#F0F0F0" }} />
     </div>
   );
 };

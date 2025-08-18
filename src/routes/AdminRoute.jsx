@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
 
   useEffect(() => {
     if (!loading && !isAdminLoading && user && !isAdmin) {
-      toast.warn("🚫 You are not allowed to access this page!");
+      toast.warn("You are not allowed to access this page!");
     }
   }, [loading, isAdminLoading, user, isAdmin]);
 

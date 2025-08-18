@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   FaShoppingBag, FaSignInAlt, FaUserPlus,
-  FaSignOutAlt, FaThLarge, FaHome
+  FaSignOutAlt, FaThLarge, FaHome,
+  FaInfoCircle
 } from 'react-icons/fa';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
@@ -29,14 +30,14 @@ const Navbar = () => {
   // Dashboard-specific navbar
   if (isDashboard) {
     return (
-      <div className="bg-gray-50 text-gray-900 px-4 shadow-md sticky top-0 z-50 w-full">
+      <div className="bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-50 px-4 shadow-md sticky top-0 z-50 w-full">
         <div className="flex justify-between items-center py-2">
           <Link to="/" className="flex items-center gap-2 text-xl font-bold">
             <img src={logo} alt="logo" className="w-12 h-12 rounded-full border border-[#CAEB66]" />
             <span className="hidden sm:inline">BazarBD</span>
           </Link>
           <button
-            className="btn bg-[#EC5800] hover:bg-[#d44c00] text-white"
+            className="btn bg-[#EC5800] hover:bg-[#d44c00] text-white dark:bg-gray-800 dark:hover:bg-gray-700 flex items-center gap-2"
             onClick={() => navigate('/')}
           >
             <FaThLarge /> Back to Home
@@ -53,7 +54,7 @@ const Navbar = () => {
       {/* Logo */}
       <Link to="/" className="flex items-center gap-2 text-xl font-bold">
         <img src={logo} alt="logo" className="w-12 h-12 rounded-full border border-black dark:border-gray-300" />
-        <span className="hidden sm:inline">BazarBD</span>
+        <span className="hidden sm:inline ">BazarBD</span>
       </Link>
 
       {/* Desktop Menu */}
@@ -83,6 +84,18 @@ const Navbar = () => {
               <FaShoppingBag className="inline mr-1" /> All Products
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/about-us"
+              className={({ isActive }) =>
+                `hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white px-3 py-1 rounded ${
+                  isActive ? "bg-black text-white dark:bg-gray-700 dark:text-white" : ""
+                }`
+              }
+            >
+              <FaInfoCircle className="inline mr-1" /> About Us
+            </NavLink>
+          </li>
           {user && (
             <li>
               <NavLink
@@ -104,10 +117,10 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4 items-center">
         {!user ? (
           <>
-            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 dark:text-gray-50" to="/login">
+            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/login">
               <FaSignInAlt className="inline mr-1" /> Login
             </NavLink>
-            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 dark:text-gray-50" to="/signup">
+            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/signup">
               <FaUserPlus className="inline mr-1" /> Sign Up
             </NavLink>
           </>

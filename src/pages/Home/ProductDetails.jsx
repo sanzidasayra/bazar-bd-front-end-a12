@@ -143,7 +143,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className='w-11/12 sm:w-10/12 md:w-10/12 lg:w-8/12 mx-auto mt-10 p-6 rounded-xl shadow-2xl bg-gray-50 dark:bg-gray-800 dark:text-gray-100'>
+    <div className='w-11/12 sm:w-10/12 md:w-10/12 lg:w-8/12 mx-auto mt-30 mb-20 p-6 rounded-xl shadow-2xl bg-gray-50 dark:bg-gray-800 dark:text-gray-100'>
   <div className='flex flex-col md:flex-row gap-6'>
     <img
       src={product.productImage}
@@ -153,6 +153,12 @@ const ProductDetails = () => {
 
     <div className='flex-1 space-y-3'>
       <h2 className='text-3xl font-bold'>{product.itemName}</h2>
+      {/* Item Description */}
+{product.itemDescription && (
+  <p className='text-gray-700 dark:text-gray-300 mt-2'>
+    {product.itemDescription}
+  </p>
+)}
       <p>
         <span className='font-semibold'>Market:</span> {product.marketName}
       </p>

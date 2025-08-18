@@ -37,15 +37,15 @@ const AllOrder = () => {
   }, [user]);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 py-10">
       <div>
-        <h1 className='text-3xl font-bold text-center mb-8 text-blue-600'>
+        <h1 className='text-3xl font-bold text-center mb-8 text-blue-600 dark:text-white'>
           All Orders
         </h1>
       </div>
-      <div className='overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-lg'>
-        <table className='min-w-full divide-y divide-gray-200 text-sm'>
-          <thead className='bg-gradient-to-r from-green-100 to-blue-100 text-gray-800 font-semibold'>
+      <div className='overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg max-w-6xl mx-auto'>
+        <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm'>
+          <thead className='bg-gradient-to-r from-green-100 to-blue-100 dark:from-gray-700 dark:to-gray-800 text-gray-800 dark:text-gray-200 font-semibold'>
             <tr>
               <th className='px-6 py-4 text-left'>#</th>
               <th className='px-6 py-4 text-left'>Order ID</th>
@@ -56,12 +56,12 @@ const AllOrder = () => {
               <th className='px-6 py-4 text-left'>Transaction ID</th>
             </tr>
           </thead>
-          <tbody className='divide-y divide-gray-100'>
+          <tbody className='divide-y divide-gray-100 dark:divide-gray-700'>
             {orders.length === 0 ? (
               <tr>
                 <td
                   colSpan='7'
-                  className='px-6 py-10 text-center text-gray-500'
+                  className='px-6 py-10 text-center text-gray-500 dark:text-gray-400'
                 >
                  No orders found.
                 </td>
@@ -70,29 +70,29 @@ const AllOrder = () => {
               orders.map((order, index) => (
                 <tr
                   key={order._id}
-                  className='hover:bg-blue-50 transition-colors duration-200 group'
+                  className='hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group'
                 >
-                  <td className='px-6 py-4 font-medium text-gray-700'>
+                  <td className='px-6 py-4 font-medium text-gray-700 dark:text-gray-200'>
                     {index + 1}
                   </td>
-                  <td className='px-6 py-4 text-gray-600 group-hover:text-blue-600 transition-colors duration-150'>
+                  <td className='px-6 py-4 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-150'>
                     {order._id}
                   </td>
-                  <td className='px-6 py-4 text-gray-700'>
+                  <td className='px-6 py-4 text-gray-700 dark:text-gray-200'>
                     {order.productName}
                   </td>
-                  <td className='px-6 py-4 text-gray-600'>
+                  <td className='px-6 py-4 text-gray-600 dark:text-gray-300'>
                     {order.buyerEmail}
                   </td>
-                  <td className='px-6 py-4 text-green-600 font-semibold'>
+                  <td className='px-6 py-4 text-green-600 dark:text-green-400 font-semibold'>
                     ৳{order.price}
                   </td>
-                  <td className='px-6 py-4 text-gray-500'>
-                    <span className='inline-block bg-gray-100 px-2 py-1 rounded-full text-xs'>
+                  <td className='px-6 py-4'>
+                    <span className='inline-block bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full text-xs text-gray-800 dark:text-gray-200'>
                       {new Date(order.date).toLocaleDateString()}
                     </span>
                   </td>
-                  <td className='px-6 py-4 text-gray-600'>
+                  <td className='px-6 py-4 text-gray-600 dark:text-gray-300'>
                     {order.transactionId}
                   </td>
                 </tr>
@@ -101,7 +101,7 @@ const AllOrder = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -63,7 +63,7 @@ const MyProducts = () => {
         } else {
           toast.error("Failed to delete product.");
         }
-        // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
       } catch (err) {
         toast.error("Server error during deletion.");
       }
@@ -71,53 +71,67 @@ const MyProducts = () => {
   };
 
   return (
-    <div className='p-4'>
-      <h2 className='text-3xl font-bold mb-6 text-[#03373D] text-center'>
+    <div className="p-4">
+      <h2 className="text-3xl font-bold mb-6 text-[#03373D] dark:text-white text-center">
         My Products
       </h2>
-      <div className='overflow-x-auto bg-white shadow-md rounded-xl'>
-        <table className='min-w-full text-sm text-left border border-gray-200 rounded-xl overflow-hidden'>
-          <thead className='bg-[#F7F7F7] uppercase text-gray-700 text-xs'>
+      <div className="overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-xl border border-gray-200 dark:border-gray-700">
+        <table className="min-w-full text-sm text-left rounded-xl overflow-hidden">
+          <thead className="bg-[#F7F7F7] dark:bg-gray-700 uppercase text-gray-700 dark:text-gray-200 text-xs">
             <tr>
-              <th className='p-3'>Item</th>
-              <th className='p-3'>Price</th>
-              <th className='p-3'>Market</th>
-              <th className='p-3'>Date</th>
-              <th className='p-3'>Status</th>
-              <th className='p-3'>Actions</th>
+              <th className="p-3">Item</th>
+              <th className="p-3">Price</th>
+              <th className="p-3">Market</th>
+              <th className="p-3">Date</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Actions</th>
             </tr>
           </thead>
           <tbody>
+            {products.length === 0 && (
+              <tr>
+                <td
+                  colSpan="6"
+                  className="text-center py-6 text-gray-500 dark:text-gray-400 text-sm"
+                >
+                  No products found.
+                </td>
+              </tr>
+            )}
             {products.map((product, idx) => (
               <tr
                 key={product._id}
                 className={`border-t transition duration-300 ${
-                  idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } hover:bg-[#E8F8F5]`}
+                  idx % 2 === 0
+                    ? "bg-white dark:bg-gray-800"
+                    : "bg-gray-50 dark:bg-gray-700"
+                } hover:bg-[#E8F8F5] dark:hover:bg-gray-600`}
               >
-                <td className='p-3 font-medium text-gray-800'>
+                <td className="p-3 font-medium text-gray-800 dark:text-gray-100">
                   {product.itemName}
                 </td>
-                <td className='p-3 text-gray-700'>
+                <td className="p-3 text-gray-700 dark:text-gray-200">
                   ৳{product.pricePerUnit}/kg
                 </td>
-                <td className='p-3 text-gray-700'>{product.marketName}</td>
-                <td className='p-3 text-gray-700'>
+                <td className="p-3 text-gray-700 dark:text-gray-200">
+                  {product.marketName}
+                </td>
+                <td className="p-3 text-gray-700 dark:text-gray-200">
                   {new Date(product.marketDate).toLocaleDateString()}
                 </td>
-                <td className='p-3'>
+                <td className="p-3">
                   {product.status === "approved" && (
-                    <span className='px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700'>
+                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200">
                       Approved
                     </span>
                   )}
                   {product.status === "pending" && (
-                    <span className='px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700'>
+                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 dark:bg-yellow-800 text-yellow-700 dark:text-yellow-200">
                       Pending
                     </span>
                   )}
                   {product.status === "rejected" && (
-                    <div className='p-2 bg-red-50 border-l-4 border-red-400 rounded mt-2 text-sm text-red-800'>
+                    <div className="p-2 bg-red-50 dark:bg-red-900 border-l-4 border-red-400 dark:border-red-700 rounded mt-2 text-sm text-red-800 dark:text-red-200">
                       <p>
                         <strong>Reason:</strong> {product.rejectionReason}
                       </p>
@@ -127,31 +141,21 @@ const MyProducts = () => {
                     </div>
                   )}
                 </td>
-                <td className='p-3 space-x-2'>
+                <td className="p-3 space-x-2">
                   <Link to={`/dashboard/vendor/update-product/${product._id}`}>
-                    <button className='px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs'>
+                    <button className="px-3 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg text-xs">
                       Update
                     </button>
                   </Link>
                   <button
                     onClick={() => handleDelete(product._id)}
-                    className='px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs'
+                    className="px-3 py-1 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 text-white rounded-lg text-xs"
                   >
                     Delete
                   </button>
                 </td>
               </tr>
             ))}
-            {products.length === 0 && (
-              <tr>
-                <td
-                  colSpan='6'
-                  className='text-center py-6 text-gray-500 text-sm'
-                >
-                  No products found.
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

@@ -30,6 +30,7 @@ import Payment from "../pages/Home/Payment/Payment";
 import ErrorPage from "../components/ErrorPage";
 import Newsletter from "../pages/Home/NewsLetter";
 import AdminNewsletter from "../components/AdminNewsletter";
+import AboutUs from "../components/AboutUs";
 
 
 
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
         {
           path: "all-products",
           element: <NavAllProducts />
+        },
+        {
+          path: "about-us",
+          element: <AboutUs />
         },
         {
           path: 'forgot',

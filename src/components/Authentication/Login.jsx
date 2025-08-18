@@ -54,69 +54,81 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md w-full sm:max-w-sm md:max-w-md mx-auto sm:px-4 md:px-8 mt-16 mb-20">
-      <h2 className="text-3xl font-bold text-[#03373D] text-center mb-2">Welcome Back</h2>
-      <p className="text-gray-500 text-sm text-center mb-6">Login to continue to your account</p>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4">
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md w-full sm:max-w-sm md:max-w-md sm:px-4 md:px-8 transition-colors duration-300">
+    <h2 className="text-3xl font-bold text-[#03373D] dark:text-white text-center mb-2">
+      Welcome Back
+    </h2>
+    <p className="text-gray-500 dark:text-gray-300 text-sm text-center mb-6">
+      Login to continue to your account
+    </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <input
+        type="email"
+        {...register("email", { required: "Email is required" })}
+        placeholder="Email"
+        className="input input-bordered w-full py-2 px-3 text-sm bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600"
+      />
+      {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+
+      <div className="relative">
         <input
-          type="email"
-          {...register("email", { required: "Email is required" })}
-          placeholder="Email"
-          className="input input-bordered w-full py-2 px-3 text-sm"
+          type={showPassword ? "text" : "password"}
+          {...register("password", {
+            required: "Password is required",
+            minLength: { value: 6, message: "Password must be at least 6 characters" },
+          })}
+          placeholder="Password"
+          className="input input-bordered w-full py-2 px-3 text-sm bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600"
         />
-        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-
-        <div className="relative">
-          <input
-            type={showPassword ? "text" : "password"}
-            {...register("password", {
-              required: "Password is required",
-              minLength: { value: 6, message: "Password must be at least 6 characters" },
-            })}
-            placeholder="Password"
-            className="input input-bordered w-full py-2 px-3 text-sm"
-          />
-          <div
-            className="absolute right-3 top-3 cursor-pointer"
-            onClick={togglePasswordVisibility}
-          >
-            {showPassword ? <FaEyeSlash className="text-xl" /> : <FaEye className="text-xl" />}
-          </div>
-        </div>
-
-        {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-        {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
-
-        <div className="text-sm">
-          <Link to="/forgot" className="text-blue-600 hover:underline">
-            Forgot Password?
-          </Link>
-        </div>
-
-        <button type="submit" className="btn bg-[#CAEB66] w-full mt-4 py-2 text-sm">
-          Login
-        </button>
-
-        <p className="text-sm mt-2 text-center">
-          Don’t have an account?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Sign Up
-          </Link>
-        </p>
-
-        <div className="divider">or</div>
-
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="btn btn-outline w-full flex items-center justify-center gap-2 py-2 text-sm"
+        <div
+          className="absolute right-3 top-3 cursor-pointer text-gray-700 dark:text-gray-300"
+          onClick={togglePasswordVisibility}
         >
-          <FcGoogle className="text-xl" />
-          Login with Google
-        </button>
-      </form>
-    </div>
+          {showPassword ? <FaEyeSlash className="text-xl" /> : <FaEye className="text-xl" />}
+        </div>
+      </div>
+
+      {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+      {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+
+      <div className="text-sm">
+        <Link to="/forgot" className="text-blue-600 dark:text-blue-400 hover:underline">
+          Forgot Password?
+        </Link>
+      </div>
+
+      <button
+        type="submit"
+        className="btn bg-[#EC5800] text-white dark:bg-gray-600 dark:text-white w-full mt-4 py-2 text-sm transition-colors duration-300"
+      >
+        Login
+      </button>
+
+      <p className="text-sm mt-2 text-center text-gray-700 dark:text-gray-300">
+        Don’t have an account?{" "}
+        <Link to="/signup" className="text-blue-600 dark:text-blue-400 hover:underline">
+          Sign Up
+        </Link>
+      </p>
+
+      <div className="divider before:bg-gray-300 dark:before:bg-gray-600 after:bg-gray-300 dark:after:bg-gray-600">or</div>
+
+<button
+  type="button"
+  onClick={handleGoogleLogin}
+  className="w-full flex items-center justify-center gap-2 py-2 text-sm text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+>
+  <FcGoogle className="text-xl" />
+  Login with Google
+</button>
+
+    </form>
+  </div>
+</div>
+
+
   );
 };
 
