@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,32 +16,41 @@ const UpdateProduct = () => {
     formState: { errors },
   } = useForm();
 
+  
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(
-          `https://bazar-bd-back-end-a12.onrender.com/products/${id}`
-        );
-        if (!res.ok) throw new Error("Product not found");
-        const data = await res.json();
-        reset({
-          itemName: data.itemName || "",
-          pricePerUnit: data.pricePerUnit || "",
-          marketName: data.marketName || "",
-          marketDate: data.marketDate?.split("T")[0] || "",
-          productImage: data.productImage || "",
-          itemDescription: data.itemDescription || "",
-        });
-        // eslint-disable-next-line no-unused-vars
-      } catch (err) {
-        toast.error("Failed to load product.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchProduct = async () => {
+    try {
+      const res = await fetch(
+        `https://bazar-bd-back-end-a12.onrender.com/products/${id}`
+      );
+      if (!res.ok) throw new Error("Product not found");
+      const data = await res.json();
 
-    fetchProduct();
-  }, [id, reset]);
+      // Compute latest price
+      const latestPrice = data.prices?.length
+        ? data.prices.reduce((latest, current) =>
+            new Date(current.date) > new Date(latest.date) ? current : latest
+          ).price
+        : data.pricePerUnit;
+
+      reset({
+        itemName: data.itemName || "",
+        pricePerUnit: latestPrice || "",
+        marketName: data.marketName || "",
+        marketDate: data.marketDate?.split("T")[0] || "",
+        productImage: data.productImage || "",
+        itemDescription: data.itemDescription || "",
+      });
+    } catch (err) {
+      toast.error("Failed to load product.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProduct();
+}, [id, reset]);
+
 
   const onSubmit = async (updatedProduct) => {
     try {
@@ -94,28 +104,23 @@ const UpdateProduct = () => {
         </div>
 
         {/* Price Per Unit */}
-        <div>
-          <label
-            htmlFor='pricePerUnit'
-            className='block text-sm font-medium text-[#03373D]'
-          >
-            Price per Unit
-          </label>
-          <input
-            type='number'
-            step='0.01'
-            {...register("pricePerUnit", {
-              required: "Price is required",
-              min: { value: 0, message: "Price must be positive" },
-            })}
-            id='pricePerUnit'
-            className='w-full border p-2'
-            placeholder='Price per Unit'
-          />
-          {errors.pricePerUnit && (
-            <p className='text-red-500'>{errors.pricePerUnit.message}</p>
-          )}
-        </div>
+   <div>
+    <label htmlFor='pricePerUnit' className='block text-sm font-medium text-[#03373D]'>
+      New Price per Unit
+    </label>
+    <input
+      type='number'
+      step='0.01'
+      {...register("pricePerUnit", {
+        required: "Price is required",
+        min: { value: 0, message: "Price must be positive" },
+      })}
+      id='pricePerUnit'
+      className='w-full border p-2'
+      placeholder='Enter new price'
+    />
+    {errors.pricePerUnit && <p className='text-red-500'>{errors.pricePerUnit.message}</p>}
+  </div>
 
         {/* Market Name */}
         <div>
@@ -138,23 +143,18 @@ const UpdateProduct = () => {
         </div>
 
         {/* Market Date */}
-        <div>
-          <label
-            htmlFor='marketDate'
-            className='block text-sm font-medium text-[#03373D]'
-          >
-            Market Date
-          </label>
-          <input
-            type='date'
-            {...register("marketDate", { required: "Market date is required" })}
-            id='marketDate'
-            className='w-full border p-2'
-          />
-          {errors.marketDate && (
-            <p className='text-red-500'>{errors.marketDate.message}</p>
-          )}
-        </div>
+  <div>
+    <label htmlFor='marketDate' className='block text-sm font-medium text-[#03373D]'>
+      Price Date
+    </label>
+    <input
+      type='date'
+      {...register("marketDate", { required: "Date is required" })}
+      id='marketDate'
+      className='w-full border p-2'
+    />
+    {errors.marketDate && <p className='text-red-500'>{errors.marketDate.message}</p>}
+  </div>
 
         {/* Product Image URL */}
         <div>

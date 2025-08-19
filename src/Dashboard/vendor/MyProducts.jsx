@@ -110,9 +110,16 @@ const MyProducts = () => {
                 <td className="p-3 font-medium text-gray-800 dark:text-gray-100">
                   {product.itemName}
                 </td>
-                <td className="p-3 text-gray-700 dark:text-gray-200">
-                  ৳{product.pricePerUnit}/kg
-                </td>
+        <td className="p-3 text-gray-700 dark:text-gray-200">
+  ৳{
+    product.prices && product.prices.length > 0
+      ? product.prices.reduce((latest, current) => 
+          new Date(current.date) > new Date(latest.date) ? current : latest
+        ).price
+      : "N/A"
+  }/kg
+</td>
+
                 <td className="p-3 text-gray-700 dark:text-gray-200">
                   {product.marketName}
                 </td>

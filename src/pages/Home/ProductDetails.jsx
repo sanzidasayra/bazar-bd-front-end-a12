@@ -164,9 +164,18 @@ const ProductDetails = () => {
       </p>
       <p>
         <span className='font-semibold'>Current Price:</span>{" "}
-        <span className='bg-[#EC5800] text-white dark:bg-gray-700 px-2 py-1 rounded font-bold'>
-          {product.prices?.[0]?.price ? `৳${product.prices[0].price}/kg` : "N/A"}
-        </span>
+  <span className='bg-[#EC5800] text-white dark:bg-gray-700 px-2 py-1 rounded font-bold'>
+ {product.prices?.length > 0
+  ? `৳${product.prices.reduce((closest, current) => {
+      const today = new Date();
+      const currentDiff = Math.abs(new Date(current.date) - today);
+      const closestDiff = Math.abs(new Date(closest.date) - today);
+      return currentDiff < closestDiff ? current : closest;
+    }).price}/kg`
+  : "N/A"}
+
+</span>
+
       </p>
       <p>
         <span className='font-semibold'>Date:</span>{" "}

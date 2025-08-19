@@ -143,9 +143,20 @@ const NavAllProducts = () => {
                 <h3 className="text-xl font-semibold mb-1 dark:text-gray-100">
                   {product.itemName}
                 </h3>
-                <p className="text-gray-700 mb-1 dark:text-gray-300">
-                  Price: ৳{product.prices?.[0]?.price || "N/A"}
-                </p>
+           <p className="text-gray-700 mb-1 dark:text-gray-300">
+  Price: ৳{
+    product.prices && product.prices.length > 0
+      ? product.prices.reduce((closest, current) => {
+          const today = new Date();
+          const currentDiff = Math.abs(new Date(current.date) - today);
+          const closestDiff = Math.abs(new Date(closest.date) - today);
+          return currentDiff < closestDiff ? current : closest;
+        }).price
+      : "N/A"
+  }
+</p>
+
+
                 <p className="text-gray-700 mb-1 dark:text-gray-300">
                   Date:{" "}
                   {product.prices?.[0]?.date

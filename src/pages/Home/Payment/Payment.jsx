@@ -9,9 +9,11 @@ import PaymentForm from './PaymentForm';
 
 const Payment = () => {
     return (
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
         <Elements stripe={stripePromise}>
             <PaymentForm />
         </Elements>
+        </div>
     );
 };
 

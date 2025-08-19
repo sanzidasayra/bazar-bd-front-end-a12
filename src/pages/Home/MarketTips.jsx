@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { GiFruitBowl, GiPriceTag, GiFarmer, GiShoppingBag } from "react-icons/gi";
 

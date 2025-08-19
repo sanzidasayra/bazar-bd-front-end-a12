@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -47,7 +48,7 @@ const CategoriesSection = () => {
           {categories.slice(0, visibleCount).map((cat) => (
             <div
   key={cat.id}
-  onClick={() => navigate(`/all-products?category=${cat.value}`)} // ✅ value should match DB
+onClick={() => navigate(`/all-products?category=${cat.title}`)}
   className="bg-white dark:bg-gray-600 shadow-xl rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer min-h-[180px]"
 >
   <img src={cat.image} alt={cat.title} className="w-full h-32 object-cover"/>

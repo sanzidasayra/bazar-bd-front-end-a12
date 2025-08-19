@@ -51,8 +51,15 @@ const ProductSection = () => {
         {loading
           ? Array(6).fill(0).map((_, idx) => <SkeletonCard key={idx} />) // just skeletons
           : products.map((product) => {
-              const latestPrice = product.prices?.[0];
-              return (
+const latestPrice = product.prices && product.prices.length > 0
+  ? product.prices.reduce((closest, current) => {
+      const today = new Date();
+      const currentDiff = Math.abs(new Date(current.date) - today);
+      const closestDiff = Math.abs(new Date(closest.date) - today);
+      return currentDiff < closestDiff ? current : closest;
+    })
+  : null;
+          return (
                 <div
                   key={product._id}
                   className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
