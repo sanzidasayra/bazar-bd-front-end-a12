@@ -31,12 +31,12 @@ const HowItWorks = () => {
   return (
     <section className="mt-20">
       <div className=" text-center">
-        <h2 className="text-4xl font-bold mb-3 text-[#EC5800] dark:text-gray-50">How It Works</h2>
-        <p className="text-gray-700 text-lg dark:text-gray-300 mb-6">
+        <h2 className="lg:text-4xl text-3xl font-bold mb-3 text-[#EC5800] dark:text-gray-50">How It Works</h2>
+        <p className="text-gray-700 lg:text-lg dark:text-gray-300 mb-6">
           Follow these simple steps to browse, buy, and track products easily.
         </p>
 
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}

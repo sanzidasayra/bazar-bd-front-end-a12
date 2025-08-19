@@ -23,10 +23,10 @@ const AdvertisementMarquee = () => {
 
   return (
     <div className="mt-20 px-4">
-      <h2 className="text-4xl font-bold text-center mb-3 text-[#EC5800] dark:text-gray-50">
+      <h2 className="lg:text-4xl md:text-3xl text-2xl font-bold text-center mb-3 text-[#EC5800] dark:text-gray-50">
         Advertisement Highlights
       </h2>
-      <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
+      <p className="text-center max-w-3xl mx-auto mb-6 lg:text-lg">
   Discover exclusive vendor promotions and seasonal highlights in this
   scrolling banner. Stay updated with the latest market deals and
   advertisements.

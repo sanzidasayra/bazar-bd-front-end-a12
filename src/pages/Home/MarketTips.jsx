@@ -28,7 +28,7 @@ const MarketTips = () => {
   return (
     <section className="mt-20  dark:from-gray-800 dark:to-gray-700">
       <div className="text-center">
-        <h2 className="text-4xl font-bold mb-12 text-[#EC5800] dark:text-gray-100">
+        <h2 className="lg:text-4xl text-3xl font-bold mb-12 text-[#EC5800] dark:text-gray-100">
           Market Tips & Insights
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">

@@ -41,7 +41,8 @@ const BannerSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[700px] overflow-hidden rounded-b-4xl shadow-lg mb-20">
+   <div className="relative w-full lg:h-[700px] md:h-[700px] h-[550px] overflow-hidden rounded-b-4xl shadow-lg mb-20">
+
       <AnimatePresence mode="wait">
         <motion.div
           key={current}

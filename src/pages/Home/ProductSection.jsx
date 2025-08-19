@@ -38,7 +38,7 @@ const ProductSection = () => {
   return (
     <div>
       <div className="text-center mb-10">
-        <h2 className="text-5xl font-bold mb-2 text-[#EC5800] flex justify-center items-center gap-2 dark:text-gray-50">
+        <h2 className="lg:text-5xl md:text-4xl text-3xl font-bold mb-2 text-[#EC5800] flex justify-center items-center gap-2 dark:text-gray-50">
           <FaShoppingBasket className="inline text-[#EC5800] dark:text-gray-50" />{" "}
           Featured Products
         </h2>

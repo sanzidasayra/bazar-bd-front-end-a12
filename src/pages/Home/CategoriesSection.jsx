@@ -35,8 +35,8 @@ const CategoriesSection = () => {
   return (
     <>
       <div className="text-center mt-20 mb-8 px-4">
-        <h2 className="text-4xl font-bold mb-3 text-center text-[#EC5800] dark:text-gray-50">Shop by Category</h2>
-        <p className="text-gray-700 text-lg max-w-3xl mx-auto dark:text-gray-300">
+        <h2 className="lg:text-4xl text-3xl font-bold mb-3 text-center text-[#EC5800] dark:text-gray-50">Shop by Category</h2>
+        <p className="text-gray-700 lg:text-lg max-w-3xl mx-auto dark:text-gray-300">
           Explore our wide range of categories to find your favorite products quickly and easily.  
           From fresh fruits and vegetables to snacks and essentials, we’ve got everything you need in one place.
         </p>
