@@ -87,6 +87,7 @@ const handleSubmit = async (e) => {
 
         date: new Date(),
         transactionId: result.paymentIntent.id
+        
       };
 
       try {

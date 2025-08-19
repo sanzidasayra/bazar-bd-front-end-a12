@@ -6,6 +6,7 @@ import ReviewCarousel from '../../components/ReviewCarousel';
 import Newsletter from './NewsLetter';
 import CategoriesSection from './CategoriesSection';
 import HowItWorks from './HowItWorks';
+import MarketTips from './MarketTips';
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
             <CategoriesSection />
             <HowItWorks />
             <Newsletter />
+            <MarketTips />
         </div>
             <ReviewCarousel />
         </>
