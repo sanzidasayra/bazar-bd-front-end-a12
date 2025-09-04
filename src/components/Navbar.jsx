@@ -192,14 +192,14 @@ const Navbar = () => {
             <NavLink
               onClick={() => setMobileOpen(false)}
               to="/login"
-              className="hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
+              className="hover:bg-black hover:text-white dark:text-gray-50 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
             >
               Login
             </NavLink>
             <NavLink
               onClick={() => setMobileOpen(false)}
               to="/signup"
-              className="hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
+              className="hover:bg-black hover:text-white dark:text-gray-50 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
             >
               Sign Up
             </NavLink>
