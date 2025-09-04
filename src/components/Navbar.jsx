@@ -117,10 +117,10 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4 items-center">
         {!user ? (
           <>
-            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/login">
+            <NavLink className="btn hover:bg-black dark:text-gray-50 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/login">
               <FaSignInAlt className="inline mr-1" /> Login
             </NavLink>
-            <NavLink className="btn hover:bg-black hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/signup">
+            <NavLink className="btn hover:bg-black dark:text-gray-50 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-900 " to="/signup">
               <FaUserPlus className="inline mr-1" /> Sign Up
             </NavLink>
           </>
