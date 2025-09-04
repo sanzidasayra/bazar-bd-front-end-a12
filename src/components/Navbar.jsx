@@ -117,10 +117,10 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4 items-center">
         {!user ? (
           <>
-            <NavLink className="btn hover:bg-black dark:text-gray-50 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-50 " to="/login">
+            <NavLink className="btn hover:bg-black text-white dark:bg-gray-700 dark:text-white  " to="/login">
               <FaSignInAlt className="inline mr-1" /> Login
             </NavLink>
-            <NavLink className="btn hover:bg-black dark:text-gray-50 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-gray-50 " to="/signup">
+            <NavLink className="btn hover:bg-black text-white dark:hover:bg-gray-700 dark:text-white  " to="/signup">
               <FaUserPlus className="inline mr-1" /> Sign Up
             </NavLink>
           </>
@@ -192,14 +192,14 @@ const Navbar = () => {
             <NavLink
               onClick={() => setMobileOpen(false)}
               to="/login"
-              className="hover:bg-black hover:text-white text-gray-50 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
+              className="bg-black :text-white text-gray-50 dark:bg-gray-700 dark:text-white px-3 py-2 rounded"
             >
               Login
             </NavLink>
             <NavLink
               onClick={() => setMobileOpen(false)}
               to="/signup"
-              className="hover:bg-black hover:text-white text-gray-50 dark:hover:bg-gray-700 dark:hover:text-white px-3 py-2 rounded"
+              className=":bg-black text-white  dark:bg-gray-700 dark:text-white px-3 py-2 rounded"
             >
               Sign Up
             </NavLink>
